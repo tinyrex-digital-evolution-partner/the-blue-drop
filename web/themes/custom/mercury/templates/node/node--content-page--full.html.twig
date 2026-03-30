@@ -1,13 +1,14 @@
 {#
 /**
  * Template full view mode — Content Page.
- * Struttura: hero small → breadcrumb → layout 33% menu + 66% contenuto.
- * Layout asimmetrico con menu di navigazione quickstart nella colonna sinistra
- * e contenuto principale nella colonna destra.
+ * Struttura: hero small → breadcrumb → layout dinamico.
+ * - Con menu padre: 33% menu + 66% contenuto affiancati
+ * - Senza menu: contenuto centrato (max-w-3xl)
  */
 #}
 
 {% set has_content = node.field_content_page_content is not empty %}
+{% set has_menu = has_parent_menu|default(false) %}
 
 {# ── Hero ─────────────────────────────────────────────────────────── #}
 {{
@@ -32,25 +33,35 @@
   </div>
 {% endif %}
 
-{# ── Layout: menu + contenuto ─────────────────────────────────────── #}
+{# ── Layout: menu + contenuto o solo contenuto centrato ──────────── #}
 <div class="container mx-auto px-4 py-12 md:py-16">
-  <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16 xl:gap-20">
-    {# ── Sidebar Menu (33%) ────────────────────────────────────────── #}
-    <aside class="w-full shrink-0 lg:w-80 xl:w-96">
-      <div class="lg:sticky lg:top-8">
-        {% if start_menu is not empty %}
-          {{ start_menu }}
+  {% if has_menu %}
+    {# Layout con menu: 33% menu + 66% contenuto #}
+    <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16 xl:gap-20">
+      {# ── Sidebar Menu (33%) ──────────────────────────────────────── #}
+      <aside class="w-full shrink-0 lg:w-80 xl:w-96">
+        <div class="lg:sticky lg:top-8">
+          {{ parent_menu }}
+        </div>
+      </aside>
+
+      {# ── Contenuto principale (66%) ──────────────────────────────── #}
+      <div class="min-w-0 flex-1">
+        {% if has_content %}
+          <div class="prose-content flex flex-col gap-8">
+            {{ content.field_content_page_content }}
+          </div>
         {% endif %}
       </div>
-    </aside>
-
-    {# ── Contenuto principale (66%) ────────────────────────────────── #}
-    <div class="min-w-0 flex-1">
+    </div>
+  {% else %}
+    {# Layout senza menu: contenuto centrato #}
+    <div class="mx-auto max-w-3xl">
       {% if has_content %}
         <div class="prose-content flex flex-col gap-8">
           {{ content.field_content_page_content }}
         </div>
       {% endif %}
     </div>
-  </div>
+  {% endif %}
 </div>

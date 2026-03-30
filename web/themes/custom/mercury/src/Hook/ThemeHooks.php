@@ -14,6 +14,7 @@ use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeSettingsProvider;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Link;
+use Drupal\Core\Menu\MenuLinkManagerInterface;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Messenger\MessengerTrait;
@@ -47,6 +48,7 @@ final class ThemeHooks {
     private readonly ChainBreadcrumbBuilderInterface $breadcrumb,
     private readonly ModuleHandlerInterface $moduleHandler,
     private readonly MenuLinkTreeInterface $menuLinkTree,
+    private readonly MenuLinkManagerInterface $menuLinkManager,
     #[Autowire(param: 'app.root')] string $appRoot,
   ) {
     self::$appRoot ??= $appRoot;
@@ -249,16 +251,57 @@ final class ThemeHooks {
           Link::createFromRoute($node->label(), '<none>'),
         ];
 
-        // Pass rendered start-menu tree.
-        $parameters = new MenuTreeParameters();
-        $parameters->setMaxDepth(2)->onlyEnabledLinks();
-        $tree = $this->menuLinkTree->load('start-menu', $parameters);
-        $manipulators = [
-          ['callable' => 'menu.default_tree_manipulators:checkAccess'],
-          ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
-        ];
-        $tree = $this->menuLinkTree->transform($tree, $manipulators);
-        $variables['start_menu'] = $this->menuLinkTree->build($tree);
+        // Find the menu link for this node to determine which menu to render.
+        $node_route = 'entity.node.canonical';
+        $node_route_params = ['node' => $node->id()];
+        
+        // Search for menu links that point to this node.
+        $menu_links = $this->menuLinkManager->loadLinksByRoute($node_route, $node_route_params);
+        
+        $parent_menu_name = NULL;
+        
+        if (!empty($menu_links)) {
+          // Get the first menu link (if node appears in multiple menus, use the first one).
+          $menu_link = reset($menu_links);
+          $parent_menu_name = $menu_link->getMenuName();
+        }
+        
+        // If we found a parent menu, load and render it.
+        if ($parent_menu_name) {
+          $parameters = new MenuTreeParameters();
+          $parameters->setMaxDepth(2)->onlyEnabledLinks();
+          $tree = $this->menuLinkTree->load($parent_menu_name, $parameters);
+          $manipulators = [
+            ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+            ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+          ];
+          $tree = $this->menuLinkTree->transform($tree, $manipulators);
+          
+          // Get current node URL to compare with menu items.
+          $currentUrl = $node->toUrl()->toString();
+          
+          // Mark menu items as active if they link to the current node.
+          foreach ($tree as $element) {
+            $link = $element->link;
+            if ($link->getUrlObject()->isRouted()) {
+              try {
+                $itemUrl = $link->getUrlObject()->toString();
+                if ($itemUrl === $currentUrl) {
+                  $element->inActiveTrail = TRUE;
+                }
+              }
+              catch (\Exception $e) {
+                // Skip if URL cannot be generated.
+              }
+            }
+          }
+          
+          $variables['parent_menu'] = $this->menuLinkTree->build($tree);
+          $variables['has_parent_menu'] = TRUE;
+        }
+        else {
+          $variables['has_parent_menu'] = FALSE;
+        }
       }
       else {
         $links = [];
