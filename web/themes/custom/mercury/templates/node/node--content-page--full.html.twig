@@ -1,0 +1,56 @@
+{#
+/**
+ * Template full view mode — Content Page.
+ * Struttura: hero small → breadcrumb → layout 33% menu + 66% contenuto.
+ * Layout asimmetrico con menu di navigazione quickstart nella colonna sinistra
+ * e contenuto principale nella colonna destra.
+ */
+#}
+
+{% set has_content = node.field_content_page_content is not empty %}
+
+{# ── Hero ─────────────────────────────────────────────────────────── #}
+{{
+  include(
+    'mercury:hero',
+    {
+      variant: 'small',
+      background_color: 'foreground',
+      text_color: 'light',
+      content_align: 'left',
+      heading_level: 1,
+      heading_text: label
+    },
+    with_context: false
+  )
+}}
+
+{# ── Breadcrumb ────────────────────────────────────────────────────── #}
+{% if page_breadcrumb is not empty %}
+  <div class="container mx-auto px-4 py-3">
+    {{ page_breadcrumb }}
+  </div>
+{% endif %}
+
+{# ── Layout: menu + contenuto ─────────────────────────────────────── #}
+<div class="container mx-auto px-4 py-12 md:py-16">
+  <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16 xl:gap-20">
+    {# ── Sidebar Menu (33%) ────────────────────────────────────────── #}
+    <aside class="w-full shrink-0 lg:w-80 xl:w-96">
+      <div class="lg:sticky lg:top-8">
+        {% if start_menu is not empty %}
+          {{ start_menu }}
+        {% endif %}
+      </div>
+    </aside>
+
+    {# ── Contenuto principale (66%) ────────────────────────────────── #}
+    <div class="min-w-0 flex-1">
+      {% if has_content %}
+        <div class="prose-content flex flex-col gap-8">
+          {{ content.field_content_page_content }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

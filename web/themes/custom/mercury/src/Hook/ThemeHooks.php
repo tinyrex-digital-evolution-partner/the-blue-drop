@@ -123,7 +123,7 @@ final class ThemeHooks {
   /**
    * Node types that render their own hero and manage title/breadcrumb themselves.
    */
-  private const HERO_NODE_TYPES = ['blog_post', 'tutorial'];
+  private const HERO_NODE_TYPES = ['blog_post', 'tutorial', 'content_page'];
 
   /**
    * View routes that render their own hero and manage title/breadcrumb themselves.
@@ -241,6 +241,24 @@ final class ThemeHooks {
           }
         }
         $links[] = Link::createFromRoute($node->label(), '<none>');
+      }
+      elseif ($node->bundle() === 'content_page') {
+        // Content page: Home > [Title]
+        $links = [
+          Link::createFromRoute($this->t('Home'), '<front>'),
+          Link::createFromRoute($node->label(), '<none>'),
+        ];
+
+        // Pass rendered start-menu tree.
+        $parameters = new MenuTreeParameters();
+        $parameters->setMaxDepth(2)->onlyEnabledLinks();
+        $tree = $this->menuLinkTree->load('start-menu', $parameters);
+        $manipulators = [
+          ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+          ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+        ];
+        $tree = $this->menuLinkTree->transform($tree, $manipulators);
+        $variables['start_menu'] = $this->menuLinkTree->build($tree);
       }
       else {
         $links = [];

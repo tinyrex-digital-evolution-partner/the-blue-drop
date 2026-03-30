@@ -31,14 +31,12 @@
 {# ── Layout 33/66 ──────────────────────────────────────────────────── #}
 <div class="container mx-auto px-4 py-10 md:py-14">
   <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
-
     {# ── Sidebar — 33% ─────────────────────────────────────────────── #}
     <aside class="w-full shrink-0 lg:w-80 xl:w-96">
-      <div class="lg:sticky lg:top-8 flex flex-col gap-6">
-
+      <div class="flex flex-col gap-6 lg:sticky lg:top-8">
         {# Etichetta sezione #}
         <div>
-          <p class="mb-1 px-1 text-xs font-bold uppercase tracking-widest text-foreground/40">
+          <p class="mb-1 px-1 text-xs font-bold tracking-widest text-foreground/40 uppercase">
             Argomenti
           </p>
 
@@ -47,27 +45,25 @@
 
           {{ tutorial_menu }}
         </div>
-
       </div>
     </aside>
 
     {# ── Contenuto vista — 66% ─────────────────────────────────────── #}
     <div class="min-w-0 flex-1">
-
       {% if exposed %}
-        <div class="mb-6 view-filters">
+        <div class="view-filters mb-6">
           {{ exposed }}
         </div>
       {% endif %}
 
       {% if header %}
-        <div class="mb-6 view-header">
+        <div class="view-header mb-6">
           {{ header }}
         </div>
       {% endif %}
 
       {% if rows %}
-        <div class="view-content grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="view-content grid grid-cols-1 gap-6 sm:grid-cols-2">
           {{ rows }}
         </div>
       {% elseif empty %}
@@ -83,12 +79,10 @@
       {% endif %}
 
       {% if footer %}
-        <div class="mt-8 view-footer">
+        <div class="view-footer mt-8">
           {{ footer }}
         </div>
       {% endif %}
-
     </div>
-
   </div>
 </div>

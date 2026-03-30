@@ -1,0 +1,53 @@
+{#
+/**
+ * Template per il menu start-menu.
+ * Stile "card" con icona freccia a destra, bordo accent sull'hover,
+ * diverso sia da blog-menu (bordo sinistro) che da tutorial-menu (pallino colorato).
+ * Design: card compatte con background marcato, transizione su bordo e ombra.
+ */
+#}
+{% if items %}
+  <nav aria-label="Menu avvio rapido">
+    <div class="mb-4">
+      <p class="px-2 text-xs font-bold tracking-widest text-foreground/40 uppercase">
+        Avvio rapido
+      </p>
+    </div>
+    <ul class="m-0 flex list-none flex-col gap-2 p-0">
+      {% for item in items %}
+        {% set is_active = item.in_active_trail %}
+        <li>
+          <a
+            href="{{ item.url }}"
+            class="flex items-center justify-between gap-3 rounded-lg border-2 px-4 py-3.5 transition-all duration-200 {{
+            is_active
+              ? 'bg-accent/10 border-accent font-bold text-foreground shadow-sm'
+              : 'bg-card border-transparent font-medium text-foreground/70 hover:border-accent/40 hover:bg-accent/5 hover:text-foreground'
+            }}"
+            {{ is_active ? 'aria-current="page"' }}
+          >
+            <span class="flex-1 text-sm leading-snug">{{ item.title }}</span>
+
+            {# Freccia a destra — sempre visibile, più opaca sui non-attivi #}
+            <svg
+              class="h-4 w-4 shrink-0 transition-colors duration-200 {{
+              is_active
+                ? 'text-accent'
+                : 'text-foreground/30 group-hover:text-accent/60'
+              }}"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
