@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\mercury\Hook;
 
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\ChainBreadcrumbBuilderInterface;
 use Drupal\Core\Controller\TitleResolverInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -12,11 +13,13 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeSettingsProvider;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Link;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -190,9 +193,35 @@ final class ThemeHooks {
 
     // Pass rendered breadcrumb to node templates that manage their own layout.
     if (in_array($node->bundle(), self::HERO_NODE_TYPES, TRUE) && $variables['view_mode'] === 'full') {
-      $variables['page_breadcrumb'] = $this->breadcrumb
-        ->build($this->routeMatch)
-        ->toRenderable();
+      // Build the breadcrumb manually so intermediate category segments (e.g.
+      // /blog/digital-transformation) show the real taxonomy term label rather
+      // than the view's static display title "Blog", which would be deduplicated
+      // by Easy Breadcrumb's remove_repeated_segments setting.
+      $links = [
+        Link::createFromRoute($this->t('Home'), '<front>'),
+        new Link($this->t('Blog'), Url::fromRoute('view.blog.page_2')),
+      ];
+
+      if ($node->hasField('field_blog_post_topics')) {
+        $topics = $node->get('field_blog_post_topics')->referencedEntities();
+        if (!empty($topics)) {
+          /** @var \Drupal\taxonomy\TermInterface $term */
+          $term = reset($topics);
+          $slug = mb_strtolower(str_replace(' ', '-', $term->label()));
+          $links[] = new Link(
+            $term->label(),
+            Url::fromRoute('view.blog.page_2', ['arg_0' => $slug]),
+          );
+        }
+      }
+
+      $links[] = Link::createFromRoute($node->label(), '<none>');
+
+      $breadcrumb = new Breadcrumb();
+      $breadcrumb->setLinks($links);
+      $breadcrumb->addCacheContexts(['url.path']);
+      $breadcrumb->addCacheableDependency($node);
+      $variables['page_breadcrumb'] = $breadcrumb->toRenderable();
     }
   }
 
@@ -204,10 +233,35 @@ final class ThemeHooks {
     $view = $variables['view'];
 
     if ($view->id() === 'blog' && $view->current_display === 'page_2') {
-      // Pass breadcrumb.
-      $variables['page_breadcrumb'] = $this->breadcrumb
-        ->build($this->routeMatch)
-        ->toRenderable();
+      // When a taxonomy argument is present (e.g. /blog/digital-transformation),
+      // Easy Breadcrumb cannot resolve the category title dynamically because
+      // the view's display title is always the static "Blog" string. Build the
+      // breadcrumb manually so the category label is the actual term name.
+      $args = $view->args;
+      if (!empty($args[0])) {
+        $slug = $args[0];
+        $term_name_search = str_replace(['-', '_'], ' ', $slug);
+        $terms = $this->entityTypeManager->getStorage('taxonomy_term')
+          ->loadByProperties(['name' => $term_name_search, 'vid' => 'blog_topics']);
+        $term_label = !empty($terms)
+          ? reset($terms)->label()
+          : ucwords($term_name_search);
+
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->setLinks([
+          Link::createFromRoute($this->t('Home'), '<front>'),
+          new Link($this->t('Blog'), Url::fromRoute('view.blog.page_2')),
+          Link::createFromRoute($term_label, '<none>'),
+        ]);
+        $breadcrumb->addCacheContexts(['url.path']);
+        $variables['page_breadcrumb'] = $breadcrumb->toRenderable();
+      }
+      else {
+        // No argument: standard breadcrumb for the main blog listing.
+        $variables['page_breadcrumb'] = $this->breadcrumb
+          ->build($this->routeMatch)
+          ->toRenderable();
+      }
 
       // Pass rendered blog-menu tree.
       $parameters = new MenuTreeParameters();

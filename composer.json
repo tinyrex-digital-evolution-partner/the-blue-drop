@@ -45,7 +45,7 @@
         "drupal/drupal_cms_helper": "^2",
         "drupal/drupal_cms_installer": "^2",
         "drupal/drupical": "^1.0.2",
-        "drupal/easy_breadcrumb": "^2.0.9",
+        "drupal/easy_breadcrumb": "^2.0",
         "drupal/easy_email": "^3.0.7",
         "drupal/easy_email_theme": "^1.1.0",
         "drupal/easy_encryption": "^1",
