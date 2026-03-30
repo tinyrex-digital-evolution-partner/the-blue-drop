@@ -1,0 +1,129 @@
+{% set has_image = node.field_blog_post_image.entity is not empty %}
+{% set has_caption = node.field_blog_post_caption.value is not empty %}
+{% set has_preview = node.field_blog_post_preview.value is not empty %}
+{% set has_tags = node.field_blog_post_tags is not empty %}
+{% set has_topics = node.field_blog_post_topics is not empty %}
+{% set has_content = node.field_blog_post_content is not empty %}
+{% set author = node.owner %}
+
+{# ── Hero (small) ──────────────────────────────────────────────────── #}
+{{
+  include(
+    'mercury:hero',
+    {
+      variant: 'small',
+      background_color: 'foreground',
+      text_color: 'light',
+      content_align: 'left',
+      heading_level: 1,
+      heading_text: label,
+      description: has_caption ? node.field_blog_post_caption.value : ''
+    },
+    with_context: false
+  )
+}}
+
+{# ── Breadcrumb ────────────────────────────────────────────────────── #}
+{% if page_breadcrumb is not empty %}
+  <div class="container mx-auto px-4 py-3">
+    {{ page_breadcrumb }}
+  </div>
+{% endif %}
+
+{# ── Layout: contenuto + sidebar ──────────────────────────────────── #}
+<div class="container mx-auto px-4 py-12 md:py-16">
+  <div class="flex flex-col gap-12 md:gap-16 lg:flex-row lg:items-start lg:gap-24">
+    {# ── Corpo principale ──────────────────────────────────────────── #}
+    <div class="min-w-0 flex-1">
+      {# Immagine principale #}
+      {% if has_image %}
+        <div class="mb-10 overflow-hidden rounded-2xl [&_img]:w-full [&_img]:object-cover">
+          {{ content.field_blog_post_image }}
+        </div>
+      {% endif %}
+
+      {# Preview / abstract #}
+      {% if has_preview %}
+        <p class="mb-8 border-l-4 border-primary pl-5 text-lg leading-relaxed font-medium text-foreground/70">
+          {{ node.field_blog_post_preview.value }}
+        </p>
+      {% endif %}
+
+      {# Contenuto paragrafi #}
+      {% if has_content %}
+        <div class="prose-content flex flex-col gap-8">
+          {{ content.field_blog_post_content }}
+        </div>
+      {% endif %}
+    </div>
+
+    {# ── Sidebar ───────────────────────────────────────────────────── #}
+    <aside class="w-full shrink-0 lg:w-72 xl:w-80">
+      <div class="flex flex-col gap-6 lg:sticky lg:top-8">
+        {# Autore #}
+        {% if author is not empty %}
+          <div class="bg-card p-6">
+            <p class="mb-4 text-xs font-bold tracking-widest text-foreground/40 uppercase">
+              Autore
+            </p>
+            <div class="flex items-center gap-4">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground uppercase ring-2 ring-primary/20"
+              >
+                {{ author.displayname|slice(0, 1) }}
+              </span>
+              <div class="flex min-w-0 flex-col">
+                <a
+                  href="{{
+                  path(
+                    'entity.user.canonical',
+                    {
+                      user: author.id
+                    }
+                  )
+                  }}"
+                  class="truncate leading-tight font-semibold transition-colors duration-200 hover:text-primary"
+                >
+                  {{ author.displayname }}
+                </a>
+                <time class="text-xs text-foreground/50" datetime="{{ node.createdtime|date('Y-m-d') }}">{{ node.createdtime|date('d M Y') }}</time>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {# Topics #}
+        {% if has_topics %}
+          <div class="bg-card p-6">
+            <p class="mb-4 text-xs font-bold tracking-widest text-foreground/40 uppercase">
+              Argomenti
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {% for item in node.field_blog_post_topics %}
+                {% if item.entity %}
+                  <span class="rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">{{ item.entity.label }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        {# Tags #}
+        {% if has_tags %}
+          <div class="bg-card p-6">
+            <p class="mb-4 text-xs font-bold tracking-widest text-foreground/40 uppercase">
+              Tag
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {% for item in node.field_blog_post_tags %}
+                {% if item.entity %}
+                  <span class="rounded-full border border-foreground/15 px-3 py-1 text-xs text-foreground/60">{{ item.entity.label }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{#
+/**
+ * Template per il menu blog-menu.
+ * Visualizza le voci come una lista verticale stile sidebar blog,
+ * evidenziando la voce attiva.
+ */
+#}
+{% if items %}
+  <nav aria-label="Menu blog">
+    <ul class="flex flex-col">
+      {% for item in items %}
+        {% set is_active = item.in_active_trail %}
+        <li>
+          {{
+            link(
+              item.title,
+              item.url,
+              {
+                class: [
+                  'group flex items-center justify-between gap-3',
+                  'px-4 py-3',
+                  'text-sm font-medium',
+                  'border-l-2 transition-all duration-200',
+                  is_active
+                    ? 'border-primary text-primary bg-primary/5 font-semibold'
+                    : 'border-transparent text-foreground/60 hover:border-primary/40 hover:text-foreground hover:bg-foreground/4'
+                ]|join(' ')
+              }
+            )
+          }}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

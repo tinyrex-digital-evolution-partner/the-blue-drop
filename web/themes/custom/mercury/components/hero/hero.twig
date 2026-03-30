@@ -31,9 +31,9 @@
   )
 %}
 
-{% set content_variants =
+{% set content_inner_variants =
   html_cva(
-    base: ['relative z-10 container mx-auto flex flex-col px-4'],
+    base: ['flex flex-col w-full lg:max-w-[70%]'],
     variants: {
       textColor: {
         light: 'text-white',
@@ -45,8 +45,8 @@
       },
       align: {
         left: 'items-start text-left',
-        center: 'items-center text-center',
-        right: 'items-end text-right'
+        center: 'items-center text-center mx-auto',
+        right: 'items-end text-right ml-auto'
       }
     }
   )
@@ -87,9 +87,10 @@
   </div>
 
   {# ── Content ────────────────────────────────────────────────────── #}
+  <div class="relative z-10 container mx-auto px-4">
   <div
     class="{{
-    content_variants.apply({
+    content_inner_variants.apply({
       textColor: hero_text_color,
       variant: hero_variant,
       align: hero_align
@@ -158,6 +159,7 @@
         {% endif %}
       </div>
     {% endif %}
+  </div>
   </div>
 
 </section>

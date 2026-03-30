@@ -1,0 +1,130 @@
+{% set has_image = node.field_blog_post_image.entity is not empty %}
+{% set has_caption = node.field_blog_post_caption.value is not empty %}
+{% set has_preview = node.field_blog_post_preview.value is not empty %}
+{% set has_tags = node.field_blog_post_tags is not empty %}
+{% set has_topics = node.field_blog_post_topics is not empty %}
+{% set author = node.owner %}
+{% set has_author = author is not empty %}
+
+<article class="group flex flex-col sm:flex-row overflow-hidden bg-card transition-all duration-300 hover:-translate-y-px">
+
+  {# ── Immagine — 33% ─────────────────────────────────────────────── #}
+  <a href="{{ url }}" class="relative overflow-hidden shrink-0 w-full sm:w-1/3 aspect-video sm:aspect-auto" tabindex="-1" aria-hidden="true">
+
+    {# Immagine o gradiente fallback #}
+    {% if has_image %}
+      <div class="absolute inset-0 [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-105">
+        {{ content.field_blog_post_image }}
+      </div>
+    {% else %}
+      <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent"></div>
+    {% endif %}
+
+    {# Overlay #}
+    <div class="absolute inset-0 bg-primary/70 transition-opacity duration-300 group-hover:bg-primary/60"></div>
+
+    {# Decorazioni geometriche #}
+    <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-white/5"></div>
+    <div class="absolute -top-3 -left-3 w-16 h-16 rounded-full bg-white/5"></div>
+
+    {# Icona decorativa #}
+    <div class="absolute inset-0 flex items-center justify-center">
+      <svg viewBox="0 0 80 80" class="w-14 h-14 text-white/25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="14" y="10" width="52" height="60" rx="6" stroke-width="2.5"/>
+        <line x1="26" y1="30" x2="54" y2="30" stroke-width="2.5"/>
+        <line x1="26" y1="42" x2="54" y2="42" stroke-width="2.5"/>
+        <line x1="26" y1="54" x2="42" y2="54" stroke-width="2.5"/>
+      </svg>
+    </div>
+
+    {# Topics badge — bottom left #}
+    {% if has_topics %}
+      <div class="absolute bottom-3 left-3 flex flex-wrap gap-1 z-10">
+        {% for item in node.field_blog_post_topics %}
+          {% if item.entity %}
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm border border-white/30">
+              {{ item.entity.label }}
+            </span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="absolute bottom-3 left-3 z-10">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm border border-white/30">
+          Articolo
+        </span>
+      </div>
+    {% endif %}
+
+  </a>
+
+  {# ── Contenuto — 66% ────────────────────────────────────────────── #}
+  <div class="flex flex-col flex-1 gap-3 p-5">
+
+    {# Meta: data + tags #}
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <time class="text-xs text-foreground/50" datetime="{{ node.createdtime|date('Y-m-d') }}">
+        {{ node.createdtime|date('d M Y') }}
+      </time>
+      {% if has_tags %}
+        <div class="flex flex-wrap justify-end gap-1.5">
+          {% for item in node.field_blog_post_tags %}
+            {% if item.entity %}
+              <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-accent text-accent-foreground">
+                {{ item.entity.label }}
+              </span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {# Titolo #}
+    <h3 class="text-lg font-bold leading-snug tracking-tight">
+      <a href="{{ url }}" class="hover:text-primary transition-colors duration-200">
+        {{ label }}
+      </a>
+    </h3>
+
+    {# Caption #}
+    {% if has_caption %}
+      <p class="text-sm font-semibold text-primary -mt-1">
+        {{ node.field_blog_post_caption.value }}
+      </p>
+    {% endif %}
+
+    {# Preview #}
+    {% if has_preview %}
+      <p class="text-sm leading-relaxed line-clamp-2 text-foreground/70">
+        {{ node.field_blog_post_preview.value }}
+      </p>
+    {% else %}
+      <p class="text-sm leading-relaxed line-clamp-2 text-foreground/50 italic">
+        Leggi l'articolo completo per scoprire tutti i dettagli.
+      </p>
+    {% endif %}
+
+    {# Autore + CTA #}
+    <div class="flex items-center gap-3 pt-3 mt-auto border-t border-foreground/8">
+      {% if has_author %}
+        <a href="{{ path('entity.user.canonical', {'user': author.id}) }}" class="shrink-0" aria-label="{{ author.displayname }}">
+          <span class="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold uppercase select-none ring-2 ring-primary/20">
+            {{ author.displayname|slice(0, 1) }}
+          </span>
+        </a>
+        <a href="{{ path('entity.user.canonical', {'user': author.id}) }}" class="text-sm font-semibold hover:text-primary transition-colors duration-200 truncate leading-tight">
+          {{ author.displayname }}
+        </a>
+      {% endif %}
+
+      <a href="{{ url }}" class="ml-auto shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all duration-200" aria-label="Leggi {{ label }}">
+        Leggi
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+
+</article>

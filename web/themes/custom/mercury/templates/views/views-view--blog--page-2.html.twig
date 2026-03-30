@@ -1,0 +1,89 @@
+{#
+/**
+ * Template per blog — page_2 (pagina elenco articoli).
+ * Layout: hero small → breadcrumb → 70/30 (contenuto | sidebar blog-menu).
+ */
+#}
+
+{# ── Hero ─────────────────────────────────────────────────────────── #}
+{{
+  include(
+    'mercury:hero',
+    {
+      variant: 'small',
+      background_color: 'foreground',
+      text_color: 'light',
+      content_align: 'left',
+      heading_level: 1,
+      heading_text: 'Blog'
+    },
+    with_context: false
+  )
+}}
+
+{# ── Breadcrumb ────────────────────────────────────────────────────── #}
+{% if page_breadcrumb is not empty %}
+  <div class="container mx-auto px-4 py-3">
+    {{ page_breadcrumb }}
+  </div>
+{% endif %}
+
+{# ── Layout 70/30 ──────────────────────────────────────────────────── #}
+<div class="container mx-auto px-4 py-10 md:py-14">
+  <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
+
+    {# ── Contenuto vista — 70% ─────────────────────────────────────── #}
+    <div class="min-w-0 flex-1">
+
+      {% if exposed %}
+        <div class="mb-6 view-filters">
+          {{ exposed }}
+        </div>
+      {% endif %}
+
+      {% if header %}
+        <div class="mb-6 view-header">
+          {{ header }}
+        </div>
+      {% endif %}
+
+      {% if rows %}
+        <div class="view-content flex flex-col gap-4">
+          {{ rows }}
+        </div>
+      {% elseif empty %}
+        <div class="view-empty py-12 text-center text-foreground/50">
+          {{ empty }}
+        </div>
+      {% endif %}
+
+      {% if pager %}
+        <div class="mt-10">
+          {{ pager }}
+        </div>
+      {% endif %}
+
+      {% if footer %}
+        <div class="mt-8 view-footer">
+          {{ footer }}
+        </div>
+      {% endif %}
+
+    </div>
+
+    {# ── Sidebar — 30% ─────────────────────────────────────────────── #}
+    <aside class="w-full shrink-0 lg:w-72 xl:w-80">
+      <div class="lg:sticky lg:top-8 flex flex-col gap-6">
+
+        <div>
+          <p class="mb-3 px-4 text-xs font-bold uppercase tracking-widest text-foreground/40">
+            Categorie
+          </p>
+          {{ blog_menu }}
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+</div>

@@ -12,6 +12,8 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeSettingsProvider;
 use Drupal\Core\Hook\Attribute\Hook;
+use Drupal\Core\Menu\MenuLinkTreeInterface;
+use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -41,6 +43,7 @@ final class ThemeHooks {
     private readonly TitleResolverInterface $titleResolver,
     private readonly ChainBreadcrumbBuilderInterface $breadcrumb,
     private readonly ModuleHandlerInterface $moduleHandler,
+    private readonly MenuLinkTreeInterface $menuLinkTree,
     #[Autowire(param: 'app.root')] string $appRoot,
   ) {
     self::$appRoot ??= $appRoot;
@@ -115,6 +118,16 @@ final class ThemeHooks {
   }
 
   /**
+   * Node types that render their own hero and manage title/breadcrumb themselves.
+   */
+  private const HERO_NODE_TYPES = ['blog_post'];
+
+  /**
+   * View routes that render their own hero and manage title/breadcrumb themselves.
+   */
+  private const HERO_VIEW_ROUTES = ['view.blog.page_2'];
+
+  /**
    * Implements template_preprocess_page().
    */
   #[Hook('preprocess_page')]
@@ -131,6 +144,18 @@ final class ThemeHooks {
     // @see \Drupal\system\Plugin\Block\SystemBreadcrumbBlock::build()
     $variables['breadcrumb'] = $this->breadcrumb->build($this->routeMatch)
       ->toRenderable();
+
+    // Suppress title and breadcrumb from the header for node types and view
+    // pages that render their own hero (they handle these elements internally).
+    $node = $this->routeMatch->getParameter('node');
+    $routeName = $this->routeMatch->getRouteName();
+    if (
+      ($node instanceof NodeInterface && in_array($node->bundle(), self::HERO_NODE_TYPES, TRUE))
+      || in_array($routeName, self::HERO_VIEW_ROUTES, TRUE)
+    ) {
+      $variables['title'] = NULL;
+      $variables['breadcrumb'] = NULL;
+    }
 
     $route_name = $this->routeMatch->getRouteName();
     if ($route_name === 'entity.canvas_page.canonical' || str_starts_with($this->routeMatch->getRouteObject()?->getPath() ?? '', '/canvas/')) {
@@ -152,6 +177,48 @@ final class ThemeHooks {
     }
     else {
       $variables['rendered_by_canvas'] = FALSE;
+    }
+  }
+
+  /**
+   * Implements template_preprocess_node().
+   */
+  #[Hook('preprocess_node')]
+  public function preprocessNode(array &$variables): void {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $variables['node'];
+
+    // Pass rendered breadcrumb to node templates that manage their own layout.
+    if (in_array($node->bundle(), self::HERO_NODE_TYPES, TRUE) && $variables['view_mode'] === 'full') {
+      $variables['page_breadcrumb'] = $this->breadcrumb
+        ->build($this->routeMatch)
+        ->toRenderable();
+    }
+  }
+
+  /**
+   * Implements template_preprocess_views_view().
+   */
+  #[Hook('preprocess_views_view')]
+  public function preprocessViewsView(array &$variables): void {
+    $view = $variables['view'];
+
+    if ($view->id() === 'blog' && $view->current_display === 'page_2') {
+      // Pass breadcrumb.
+      $variables['page_breadcrumb'] = $this->breadcrumb
+        ->build($this->routeMatch)
+        ->toRenderable();
+
+      // Pass rendered blog-menu tree.
+      $parameters = new MenuTreeParameters();
+      $parameters->setMaxDepth(2)->onlyEnabledLinks();
+      $tree = $this->menuLinkTree->load('blog-menu', $parameters);
+      $manipulators = [
+        ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+        ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+      ];
+      $tree = $this->menuLinkTree->transform($tree, $manipulators);
+      $variables['blog_menu'] = $this->menuLinkTree->build($tree);
     }
   }
 

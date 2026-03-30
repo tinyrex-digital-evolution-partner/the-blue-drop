@@ -16,32 +16,68 @@
 }
 
 .hero-gradient-primary {
-  background: linear-gradient(-45deg, var(--primary), color-mix(in oklch, var(--primary) 60%, var(--accent)), var(--primary), color-mix(in oklch, var(--primary) 75%, var(--secondary-foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--primary),
+    color-mix(in oklch, var(--primary) 60%, var(--accent)),
+    var(--primary),
+    color-mix(in oklch, var(--primary) 75%, var(--secondary-foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
 .hero-gradient-secondary {
-  background: linear-gradient(-45deg, var(--secondary), color-mix(in oklch, var(--secondary) 70%, var(--muted-foreground)), var(--secondary), color-mix(in oklch, var(--secondary) 80%, var(--foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--secondary),
+    color-mix(in oklch, var(--secondary) 70%, var(--muted-foreground)),
+    var(--secondary),
+    color-mix(in oklch, var(--secondary) 80%, var(--foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
 .hero-gradient-accent {
-  background: linear-gradient(-45deg, var(--accent), color-mix(in oklch, var(--accent) 65%, var(--primary)), var(--accent), color-mix(in oklch, var(--accent) 70%, var(--secondary-foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--accent),
+    color-mix(in oklch, var(--accent) 65%, var(--primary)),
+    var(--accent),
+    color-mix(in oklch, var(--accent) 70%, var(--secondary-foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
 .hero-gradient-muted {
-  background: linear-gradient(-45deg, var(--muted), color-mix(in oklch, var(--muted) 70%, var(--secondary-foreground)), var(--muted), color-mix(in oklch, var(--muted) 60%, var(--muted-foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--muted),
+    color-mix(in oklch, var(--muted) 70%, var(--secondary-foreground)),
+    var(--muted),
+    color-mix(in oklch, var(--muted) 60%, var(--muted-foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
 .hero-gradient-foreground {
-  background: linear-gradient(-45deg, var(--foreground), color-mix(in oklch, var(--foreground) 80%, var(--primary)), var(--foreground), color-mix(in oklch, var(--foreground) 70%, var(--secondary-foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--foreground),
+    color-mix(in oklch, var(--foreground) 80%, var(--primary)),
+    var(--foreground),
+    color-mix(in oklch, var(--foreground) 70%, var(--secondary-foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
 .hero-gradient-secondary-foreground {
-  background: linear-gradient(-45deg, var(--secondary-foreground), color-mix(in oklch, var(--secondary-foreground) 75%, var(--primary)), var(--secondary-foreground), color-mix(in oklch, var(--secondary-foreground) 80%, var(--foreground)));
+  background: linear-gradient(
+    -45deg,
+    var(--secondary-foreground),
+    color-mix(in oklch, var(--secondary-foreground) 75%, var(--primary)),
+    var(--secondary-foreground),
+    color-mix(in oklch, var(--secondary-foreground) 80%, var(--foreground))
+  );
   background-size: 300% 300%;
   animation: hero-gradient-shift 16s ease infinite;
 }
@@ -103,16 +139,16 @@
   --text-4xl--line-height: 1.2;
 
   --text-3xl: 3rem;
-  --text-3xl--line-height: 1.3125;
+  --text-3xl--line-height: 1.2;
 
   --text-2xl: 2.5rem;
-  --text-2xl--line-height: 1.3333;
+  --text-2xl--line-height: 1.2;
 
   --text-xl: 2rem;
-  --text-xl--line-height: 1.35;
+  --text-xl--line-height: 1.25;
 
   --text-lg: 1.5rem;
-  --text-lg--line-height: 1.5;
+  --text-lg--line-height: 1.35;
 
   --text-base: 1.25rem;
   --text-base--line-height: 1.5;
@@ -340,6 +376,23 @@
 
   .progress-text {
     @apply text-inherit!;
+  }
+}
+
+/* Spacing for headings inside rich text / paragraph content blocks */
+.prose-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  > :first-child {
+    margin-top: 0;
   }
 }
 
