@@ -1,0 +1,90 @@
+{#
+/**
+ * Template per User Profile (default view mode).
+ * Mostra il profilo dell'utente con immagine, descrizione e link in un layout moderno.
+ *
+ * Available variables:
+ * - content: Contiene tutti i campi renderizzabili inclusi:
+ *   - content.user_picture: L'immagine del profilo utente
+ *   - content.field_user_description: La descrizione dell'utente
+ *   - content.field_user_urls: I link/URL dell'utente
+ * - attributes: Attributi HTML per il contenitore
+ * - user: L'entità User di Drupal
+ *
+ * Campo utente standard: user_picture
+ * Campi custom: field_user_description, field_user_urls
+ */
+#}
+
+{% set has_picture = content.user_picture is not empty %}
+{% set has_description = content.field_user_description is not empty %}
+{% set has_urls = content.field_user_urls is not empty %}
+{% set username = user.getDisplayName() %}
+
+{# ── Hero con nome utente ───────────────────────────────────────────── #}
+{{
+  include(
+    'mercury:hero',
+    {
+      variant: 'small',
+      background_color: 'foreground',
+      text_color: 'light',
+      content_align: 'left',
+      heading_level: 1,
+      heading_text: username
+    },
+    with_context: false
+  )
+}}
+
+{# ── Profilo utente ────────────────────────────────────────────────── #}
+<article {{ attributes.addClass('user-profile') }}>
+  <div class="container mx-auto px-4 py-12 md:py-16">
+    <div class="mx-auto max-w-4xl">
+      {# ── Sezione superiore: immagine + descrizione ─────────────────── #}
+      <div class="flex flex-col gap-8 md:flex-row md:gap-12">
+        {# ── Immagine profilo ───────────────────────────────────────── #}
+        {% if has_picture %}
+          <div class="shrink-0">
+            <div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-foreground/10">
+              {{ content.user_picture }}
+            </div>
+          </div>
+        {% endif %}
+
+        {# ── Descrizione utente ─────────────────────────────────────── #}
+        {% if has_description %}
+          <div class="flex-1">
+            <div class="mb-4 flex items-center gap-2">
+              <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <h2 class="text-lg font-semibold text-foreground">Chi sono</h2>
+            </div>
+            <div class="prose-content text-base leading-relaxed text-foreground/80">
+              {{ content.field_user_description }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      {# ── Link e contatti ──────────────────────────────────────────── #}
+      {% if has_urls %}
+        <div class="mt-12">
+          <div class="mb-6 flex items-center gap-2">
+            <svg class="h-5 w-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+            <h2 class="text-lg font-semibold text-foreground">Link e contatti</h2>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            {{ content.field_user_urls }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</article>

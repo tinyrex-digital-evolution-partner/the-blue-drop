@@ -1,6 +1,6 @@
 <footer class="bg-foreground text-background">
   {# ── Newsletter ─────────────────────────────────────────────────── #}
-  <div class="border-b border-background/10">
+  {# <div class="border-b border-background/10">
     <div class="container mx-auto px-4 py-14 md:py-16">
       <div class="flex flex-col justify-between gap-8 md:flex-row md:items-center">
         <div class="flex max-w-md flex-col gap-3">
@@ -28,7 +28,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> #}
 
   {# ── Corpo principale ────────────────────────────────────────────── #}
   <div class="container mx-auto px-4 py-14 md:py-16">
@@ -36,10 +36,14 @@
       {# Colonna brand — sinistra #}
       <div class="flex w-full max-w-md flex-col gap-5 lg:w-120">
         <div class="flex items-center gap-3">
-          <span class="text-xl font-bold tracking-tight text-background">Drupal Italia</span>
+          <img src="/themes/custom/mercury/logo-w.svg" alt="The Blue Drop" class="h-8" />
         </div>
         <p class="text-sm leading-relaxed text-background/55">
-          La comunità italiana di Drupal. Uniamo sviluppatori, designer e professionisti digitali appassionati di open source.
+          The Blue Drop è il blog di riferimento per la community italiana che lavora con Drupal. Qui condividiamo tutorial, guide alla configurazione
+          e news aggiornate su core e moduli, per aiutare chi lavora ogni giorno con questo CMS.
+        </p>
+        <p class="text-xs leading-relaxed text-background/40">
+          Drupal è un marchio registrato di Dries Buytaert. Questo sito non è affiliato alla Drupal Association o al Drupal Project.
         </p>
       </div>
 
@@ -126,13 +130,13 @@
   <div class="border-t border-background/10">
     <div class="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-5 sm:flex-row">
       <p class="text-xs text-background/40">
-        © {{ 'now'|date('Y') }} Drupal Italia. Contenuti rilasciati sotto licenza
+        © {{ 'now'|date('Y') }} The Blue Drop. Contenuti rilasciati sotto licenza
         <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="underline transition-colors duration-200 hover:text-background">
           CC BY-SA 4.0
         </a>.
       </p>
       <p class="text-xs text-background/40">
-        Sito a cura di
+        Blog indipendente a cura di
         <a
           href="https://www.alexpezzini.it"
           title="Alex Pezzini - Consulenza Drupal"

@@ -1,0 +1,15 @@
+{#
+/**
+ * Template per il campo field_user_urls nel profilo utente.
+ * Renderizza i link con stile minimal, target blank già configurato nelle impostazioni del campo.
+ *
+ * Available variables:
+ * - items: Array di elementi del campo link renderizzati
+ */
+#}
+
+{% for item in items %}
+  <div class="field-user-url-item">
+    {{ item.content }}
+  </div>
+{% endfor %}

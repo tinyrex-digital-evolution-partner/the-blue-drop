@@ -480,4 +480,33 @@
   .heading-responsive-xl {
     @apply text-lg md:text-xl; /* H5 */
   }
+
+  /* Stile card con bordo per i link del profilo utente */
+  .field-user-url-item {
+    @apply rounded-xl border border-foreground/10 bg-foreground/5 px-4 py-3 transition-colors duration-200;
+  }
+
+  .field-user-url-item:hover {
+    @apply bg-foreground/10;
+  }
+
+  .field-user-url-item a {
+    @apply flex items-center gap-3 text-sm font-medium text-foreground no-underline;
+  }
+
+  .field-user-url-item a::before {
+    content: "";
+    @apply inline-block h-5 w-5 shrink-0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%235b21b6' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .field-user-url-item a::after {
+    content: "";
+    @apply ml-auto inline-block h-4 w-4 shrink-0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }

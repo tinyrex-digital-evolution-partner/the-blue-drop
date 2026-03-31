@@ -73,19 +73,36 @@
                 {{ author.displayname|slice(0, 1) }}
               </span>
               <div class="flex min-w-0 flex-col">
-                <a
-                  href="{{
-                  path(
-                    'entity.user.canonical',
-                    {
-                      user: author.id
-                    }
-                  )
-                  }}"
-                  class="truncate leading-tight font-semibold transition-colors duration-200 hover:text-primary"
-                >
-                  {{ author.displayname }}
-                </a>
+                {% if author_profile_title is defined and author_profile_title is not empty %}
+                  <a
+                    href="{{
+                    path(
+                      'entity.user.canonical',
+                      {
+                        user: author.id
+                      }
+                    )
+                    }}"
+                    title="{{ author_profile_title }}"
+                    class="truncate leading-tight font-semibold transition-colors duration-200 hover:text-primary"
+                  >
+                    {{ author.displayname }}
+                  </a>
+                {% else %}
+                  <a
+                    href="{{
+                    path(
+                      'entity.user.canonical',
+                      {
+                        user: author.id
+                      }
+                    )
+                    }}"
+                    class="truncate leading-tight font-semibold transition-colors duration-200 hover:text-primary"
+                  >
+                    {{ author.displayname }}
+                  </a>
+                {% endif %}
                 <time class="text-xs text-foreground/50" datetime="{{ node.createdtime|date('Y-m-d') }}">{{ node.createdtime|date('d M Y') }}</time>
               </div>
             </div>

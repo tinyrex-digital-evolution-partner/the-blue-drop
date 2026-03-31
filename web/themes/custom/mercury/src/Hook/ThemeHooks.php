@@ -150,13 +150,14 @@ final class ThemeHooks {
     $variables['breadcrumb'] = $this->breadcrumb->build($this->routeMatch)
       ->toRenderable();
 
-    // Suppress title and breadcrumb from the header for node types and view
-    // pages that render their own hero (they handle these elements internally).
+    // Suppress title and breadcrumb from the header for node types, view pages,
+    // and user profiles that render their own hero (they handle these elements internally).
     $node = $this->routeMatch->getParameter('node');
     $routeName = $this->routeMatch->getRouteName();
     if (
       ($node instanceof NodeInterface && in_array($node->bundle(), self::HERO_NODE_TYPES, TRUE))
       || in_array($routeName, self::HERO_VIEW_ROUTES, TRUE)
+      || $routeName === 'entity.user.canonical'
     ) {
       $variables['title'] = NULL;
       $variables['breadcrumb'] = NULL;
@@ -313,6 +314,17 @@ final class ThemeHooks {
       $breadcrumb->addCacheableDependency($node);
       $variables['page_breadcrumb'] = $breadcrumb->toRenderable();
     }
+    
+    // Pass author's profile title for all blog post view modes (full, teaser, etc.).
+    if ($node->bundle() === 'blog_post') {
+      $author = $node->getOwner();
+      if ($author && $author->hasField('field_user_title')) {
+        $profile_title = $author->get('field_user_title')->value;
+        if (!empty($profile_title)) {
+          $variables['author_profile_title'] = $profile_title;
+        }
+      }
+    }
   }
 
   /**
@@ -404,6 +416,21 @@ final class ThemeHooks {
       $tree = $this->menuLinkTree->transform($tree, $manipulators);
       $variables['tutorial_menu'] = $this->menuLinkTree->build($tree);
     }
+  }
+
+  /**
+   * Implements hook_preprocess_HOOK() for user profiles.
+   */
+  #[Hook('preprocess_user')]
+  public function preprocessUser(array &$variables): void {
+    /** @var \Drupal\user\UserInterface $user */
+    $user = $variables['user'];
+    $view_mode = $variables['elements']['#view_mode'] ?? 'default';
+
+    // Pass variables for template conditionals.
+    $variables['view_mode'] = $view_mode;
+    $variables['username'] = $user->getDisplayName();
+    $variables['user_id'] = $user->id();
   }
 
 }
