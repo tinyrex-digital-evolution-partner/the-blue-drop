@@ -201,15 +201,15 @@
 
   /* Set base heading styles since Tailwind sets them to inherit */
   h1 {
-    @apply text-5xl leading-none font-semibold md:text-6xl lg:text-7xl 2xl:text-8xl;
+    @apply text-5xl leading-none font-extrabold md:text-6xl lg:text-7xl 2xl:text-8xl;
   }
 
   h2 {
-    @apply text-3xl font-semibold md:text-4xl lg:text-5xl 2xl:text-6xl;
+    @apply text-3xl font-extrabold md:text-4xl lg:text-5xl 2xl:text-6xl;
   }
 
   h3 {
-    @apply text-2xl font-semibold xl:text-3xl;
+    @apply text-2xl font-extrabold xl:text-3xl;
   }
 
   h4 {
@@ -402,6 +402,12 @@
   h6 {
     margin-top: 1.5em;
     margin-bottom: 0.5em;
+  }
+
+  h1 strong,
+  h2 strong,
+  h3 strong {
+    font-weight: inherit;
   }
 
   > :first-child {

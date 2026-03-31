@@ -3,13 +3,13 @@
 {% set has_items = content.field_content_ref|render|striptags|trim is not empty %}
 
 {% if has_items %}
-  <div class="w-full bg-primary pt-4 pb-16 md:pb-20">
+  <div class="mt-12 w-full bg-primary pt-2 pb-16 md:pb-20">
     <div class="container mx-auto px-10 md:px-16">
       {% if has_title %}
         <h3 class="mb-10 text-2xl font-bold tracking-tight text-primary-foreground md:mb-12 md:text-3xl">{{ title_value }}</h3>
       {% endif %}
 
-      <div class="mt-10 w-full">
+      <div class="related-content__grid mt-10 w-full">
         {{ content.field_content_ref }}
       </div>
     </div>

@@ -193,41 +193,36 @@
           <span class="text-xs text-foreground/50">Autore</span>
         </div>
 
-        <a
-          href="{{ url }}"
-          class="ml-auto inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
-          aria-label="Leggi articolo"
-        >
-          <svg
-            class="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+        {{
+          include(
+            'mercury:button',
+            {
+              variant: 'primary-inverted',
+              size: 'small',
+              label: 'Leggi',
+              href: url,
+              icon: 'arrow-right',
+              btn_classes: ['ml-auto', 'shrink-0']
+            },
+            with_context: false
+          )
+        }}
       </div>
     {% else %}
-      <div class="mt-auto border-t border-foreground/8 pt-4">
-        <a href="{{ url }}" class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 hover:gap-3">
-          Leggi articolo<svg
-            class="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+      <div class="mt-auto flex justify-end border-t border-foreground/8 pt-4">
+        {{
+          include(
+            'mercury:button',
+            {
+              variant: 'primary-inverted',
+              size: 'small',
+              label: 'Leggi',
+              href: url,
+              icon: 'arrow-right'
+            },
+            with_context: false
+          )
+        }}
       </div>
     {% endif %}
   </div>

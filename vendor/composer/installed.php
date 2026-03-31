@@ -865,6 +865,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'drupal/menu_item_extras' => array(
+            'pretty_version' => '3.1.0',
+            'version' => '3.1.0.0',
+            'reference' => '3.1.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../web/modules/contrib/menu_item_extras',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'drupal/menu_link_attributes' => array(
             'pretty_version' => '1.7.0',
             'version' => '1.7.0.0',

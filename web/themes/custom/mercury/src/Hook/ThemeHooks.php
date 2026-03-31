@@ -419,6 +419,61 @@ final class ThemeHooks {
   }
 
   /**
+   * Implements hook_preprocess_menu().
+   *
+   * Attaches the topic color from field_tutorial_topics_color to each item
+   * of the tutorial-menu so the Twig template can render the colored dot.
+   */
+  #[Hook('preprocess_menu')]
+  public function preprocessMenu(array &$variables): void {
+    if (($variables['menu_name'] ?? '') !== 'tutorial-menu') {
+      return;
+    }
+    $this->attachTutorialMenuColors($variables['items']);
+  }
+
+  /**
+   * Recursively loads field_tutorial_topics_color for tutorial-menu items.
+   *
+   * @param array $items
+   *   Menu items array (passed by reference).
+   */
+  private function attachTutorialMenuColors(array &$items): void {
+    foreach ($items as &$item) {
+      $link = $item['original_link'] ?? NULL;
+      if ($link !== NULL && str_starts_with($link->getPluginId(), 'menu_link_content:')) {
+        $uuid = $link->getDerivativeId();
+        $entities = $this->entityTypeManager->getStorage('menu_link_content')
+          ->loadByProperties(['uuid' => $uuid]);
+        if (!empty($entities)) {
+          $menu_link_entity = reset($entities);
+          if (!($menu_link_entity instanceof \Drupal\Core\Entity\FieldableEntityInterface)) {
+            continue;
+          }
+          if ($menu_link_entity->hasField('field_menu_topics')) {
+            /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $field */
+            $field = $menu_link_entity->get('field_menu_topics');
+            $topics = $field->referencedEntities();
+            if (!empty($topics)) {
+              /** @var \Drupal\taxonomy\TermInterface $term */
+              $term = reset($topics);
+              if ($term->hasField('field_tutorial_topics_color')) {
+                $hex = $term->get('field_tutorial_topics_color')->value;
+                if (!empty($hex)) {
+                  $item['topic_color'] = $hex;
+                }
+              }
+            }
+          }
+        }
+      }
+      if (!empty($item['below'])) {
+        $this->attachTutorialMenuColors($item['below']);
+      }
+    }
+  }
+
+  /**
    * Implements hook_preprocess_HOOK() for user profiles.
    */
   #[Hook('preprocess_user')]

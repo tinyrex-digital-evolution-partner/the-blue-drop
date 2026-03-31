@@ -23,21 +23,16 @@
             }}"
             {{ is_active ? 'aria-current="page"' }}
           >
-            {#
-              Pallino colorato — per ora statico con il colore accent.
-              In futuro: style="background-color: {{ item.topic_color }}"
-              quando il termine tassonomia avrà field_tutorial_topics_color.
-            #}
+            {# Pallino colorato: usa il colore del termine tassonomia se disponibile #}
             <span
               class="h-2.5 w-2.5 shrink-0 rounded-full transition-colors duration-200 {{
-              is_active
-                ? 'bg-accent'
-                : 'bg-foreground/20 group-hover:bg-accent/50'
+                item.topic_color ? '' : (is_active ? 'bg-accent' : 'bg-foreground/20 group-hover:bg-accent/50')
               }}"
+              {% if item.topic_color %}
+                style="background-color: {{ item.topic_color }}"
+              {% endif %}
               aria-hidden="true"
-            >
-
-            </span>
+            ></span>
 
             <span class="flex-1 text-sm leading-snug">{{ item.title }}</span>
 

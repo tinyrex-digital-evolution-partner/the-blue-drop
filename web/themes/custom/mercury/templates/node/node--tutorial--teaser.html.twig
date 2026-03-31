@@ -109,24 +109,19 @@
         <time datetime="{{ node.createdtime|date('Y-m-d') }}">{{ node.createdtime|date('d M Y') }}</time>
       </div>
 
-      <a
-        href="{{ url }}"
-        class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-200 hover:gap-3"
-        aria-label="Inizia {{ label }}"
-      >
-        Inizia<svg
-          class="h-4 w-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </a>
+      {{
+        include(
+          'mercury:button',
+          {
+            variant: 'primary-inverted',
+            size: 'small',
+            label: 'Inizia',
+            href: url,
+            icon: 'arrow-right'
+          },
+          with_context: false
+        )
+      }}
     </div>
   </div>
 </article>
