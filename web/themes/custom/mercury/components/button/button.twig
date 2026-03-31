@@ -7,7 +7,7 @@
   html_cva(
     base: [
       'group inline-flex items-center justify-center transition-all duration-200 ease-in-out',
-      'rounded-full leading-none font-semibold tracking-[-1px] italic',
+      'leading-none font-semibold',
       'cursor-pointer no-underline outline-none hover:no-underline',
       'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-40',
@@ -15,9 +15,9 @@
     ],
     variants: {
       size: {
-        small: 'gap-1.5 px-4 py-2 text-sm',
-        medium: 'gap-2 px-5 py-2.5 text-base',
-        large: 'gap-2.5 px-7 py-3 text-lg'
+        small: 'gap-1.5 px-6 py-2 text-xs',
+        medium: 'gap-2 px-8 py-3 text-sm',
+        large: 'gap-2.5 px-10 py-3.5 text-base'
       },
       variant: {
         primary: 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:shadow-md',

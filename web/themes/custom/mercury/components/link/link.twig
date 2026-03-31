@@ -1,0 +1,69 @@
+{% set link_variant = variant|default('default') %}
+{% set link_target = target|default('_self') %}
+{% set link_icon = icon|default('arrow-square-out') %}
+
+{% set link_variants =
+  html_cva(
+    base: [
+      'group inline-flex w-full items-center gap-3',
+      'rounded-xl border border-foreground/10 px-4 py-3',
+      'text-sm font-medium text-foreground',
+      'no-underline hover:no-underline',
+      'transition-colors duration-200',
+      'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+    ],
+    variants: {
+      variant: {
+        default: 'bg-foreground/5 hover:bg-foreground/10',
+        subtle: 'bg-transparent hover:bg-foreground/5'
+      }
+    }
+  )
+%}
+
+{# Normalize link_classes - handle both array and string formats #}
+{% set additional_classes = link_classes|default('') %}
+{% if additional_classes is iterable %}
+  {% set additional_classes = additional_classes|join(' ') %}
+{% endif %}
+
+{% set target_attrs = link_target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' : '' %}
+
+<a
+  href="{{ url }}"
+  class="{{
+  link_variants.apply(
+    {
+      variant: link_variant
+    },
+    additional_classes
+  )
+  }}"
+  {{ target_attrs }}
+>
+  <span class="shrink-0 text-foreground">
+    {{
+      include(
+        '@mercury/components/icon/icon.twig',
+        {
+          icon: link_icon,
+          icon_size: 'extra-small'
+        },
+        with_context: false
+      )
+    }}
+  </span>
+  <span class="flex-1 truncate">{{ title }}</span>
+  <span class="shrink-0 text-foreground/40 transition-transform duration-200 group-hover:translate-x-0.5">
+    {{
+      include(
+        '@mercury/components/icon/icon.twig',
+        {
+          icon: 'caret-right',
+          icon_size: 'extra-small'
+        },
+        with_context: false
+      )
+    }}
+  </span>
+</a>

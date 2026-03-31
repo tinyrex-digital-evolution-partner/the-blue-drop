@@ -4,12 +4,18 @@
     <h3 class="text-sm font-bold tracking-widest text-background/50 uppercase">{{ menu_title }}</h3>
   {% endif %}
   {% if items %}
-    <ul class="flex flex-col gap-3 list-none m-0 p-0">
+    <ul class="m-0 flex list-none flex-col gap-3 p-0">
       {% for item in items %}
         <li>
-          {{ link(item.title, item.url, {
-            class: 'text-sm text-background/60 no-underline transition-colors duration-200 hover:text-background'
-          }) }}
+          {{
+            link(
+              item.title,
+              item.url,
+              {
+                class: 'text-sm text-background/60 no-underline transition-colors duration-200 hover:text-background'
+              }
+            )
+          }}
         </li>
       {% endfor %}
     </ul>

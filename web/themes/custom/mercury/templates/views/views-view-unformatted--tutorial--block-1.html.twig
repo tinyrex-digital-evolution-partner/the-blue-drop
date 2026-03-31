@@ -33,22 +33,18 @@
 
   {# Footer sezione #}
   <div class="mt-14 flex justify-center">
-    <a
-      href="/tutorial"
-      class="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
-    >
-      Esplora tutti i tutorial<svg
-        class="h-4 w-4"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M5 12h14M12 5l7 7-7 7" />
-      </svg>
-    </a>
+    {{
+      include(
+        'mercury:button',
+        {
+          label: 'Esplora tutti i tutorial',
+          href: '/tutorial',
+          variant: 'primary-inverted',
+          size: 'medium',
+          icon: 'arrow-right'
+        },
+        with_context: false
+      )
+    }}
   </div>
 </div>

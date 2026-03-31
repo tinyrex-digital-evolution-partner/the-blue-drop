@@ -19,9 +19,9 @@
         <li>
           <a
             href="{{ item.url }}"
-            class="flex items-center justify-between gap-3 rounded-lg border-2 px-4 py-3.5 transition-all duration-200 {{
+            class="flex items-center justify-between gap-3 border-2 px-4 py-3.5 transition-all duration-200 {{
             is_active
-              ? 'bg-accent/10 border-accent font-bold text-foreground shadow-sm'
+              ? 'bg-accent/10 border-accent font-bold text-foreground'
               : 'bg-card border-transparent font-medium text-foreground/70 hover:border-accent/40 hover:bg-accent/5 hover:text-foreground'
             }}"
             {{ is_active ? 'aria-current="page"' }}

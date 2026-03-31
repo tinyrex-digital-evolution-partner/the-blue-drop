@@ -1,0 +1,32 @@
+{% set title_value = paragraph.field_block_title.value ?? '' %}
+{% set has_title = title_value is not empty %}
+{% set has_links = paragraph.field_block_links is not empty %}
+
+{% if has_links %}
+  <div class="flex flex-col gap-6">
+    {% if has_title %}
+      <h3 class="text-xl font-bold tracking-tight md:text-2xl">{{ title_value }}</h3>
+    {% endif %}
+
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {% for item in paragraph.field_block_links %}
+        {% set link_url = item.uri|default('') %}
+        {% set link_title = item.title|default('') %}
+        {% if link_url is not empty and link_title is not empty %}
+          {% set is_external = link_url starts with 'http' %}
+          {{
+            include(
+              'mercury:link',
+              {
+                url: link_url,
+                title: link_title,
+                target: is_external ? '_blank' : '_self'
+              },
+              with_context: false
+            )
+          }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

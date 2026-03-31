@@ -1,15 +1,30 @@
 {#
 /**
  * Template per il campo field_user_urls nel profilo utente.
- * Renderizza i link con stile minimal, target blank già configurato nelle impostazioni del campo.
+ * Renderizza ogni link con il componente SDC mercury:link.
  *
  * Available variables:
- * - items: Array di elementi del campo link renderizzati
+ * - items: Array di elementi del campo link
+ * - element: Il render array completo del campo
  */
 #}
 
 {% for item in items %}
-  <div class="field-user-url-item">
-    {{ item.content }}
-  </div>
+  {% set link_url = item.content['#url'].toString() %}
+  {% set link_title = item.content['#title']|default(link_url) %}
+  {% set link_options = item.content['#options']|default({}) %}
+  {% set link_attributes = link_options.attributes|default({}) %}
+  {% set link_target = link_attributes.target|default('_self') %}
+
+  {{
+    include(
+      'mercury:link',
+      {
+        url: link_url,
+        title: link_title,
+        target: link_target
+      },
+      with_context: false
+    )
+  }}
 {% endfor %}

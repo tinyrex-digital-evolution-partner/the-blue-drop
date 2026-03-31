@@ -1,0 +1,33 @@
+{% set has_topics = node.field_tutorial_topics is not empty %}
+{% set has_preview = node.field_tutorial_preview.value is not empty %}
+
+<article class="group flex flex-col gap-3 border-b border-foreground/8 py-4 last:border-b-0">
+  {# Topics #}
+  {% if has_topics %}
+    <div class="flex flex-wrap items-center gap-2">
+      {% for item in node.field_tutorial_topics %}
+        {% if item.entity %}
+          {% set t_color = item.entity.field_tutorial_topics_color.value is not empty ? item.entity.field_tutorial_topics_color.value : null %}
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/60">
+            {% if t_color %}
+              <span class="h-2 w-2 shrink-0 rounded-full" style="background-color: {{ t_color }};" aria-hidden="true"></span>
+            {% endif %}
+            {{ item.entity.label }}
+          </span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {# Titolo #}
+  <h4 class="text-sm leading-snug font-semibold tracking-tight">
+    <a href="{{ url }}" class="transition-colors duration-200 hover:text-primary">{{ label }}</a>
+  </h4>
+
+  {# Preview #}
+  {% if has_preview %}
+    <p class="line-clamp-2 text-xs leading-relaxed text-foreground/50">
+      {{ node.field_tutorial_preview.value }}
+    </p>
+  {% endif %}
+</article>

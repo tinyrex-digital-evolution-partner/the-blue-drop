@@ -85,64 +85,78 @@
   </div>
 {% endif %}
 
-{# ── Contenuto ────────────────────────────────────────────────────── #}
+{# ── Layout: sidebar + contenuto ──────────────────────────────────── #}
 <div class="container mx-auto px-4 py-12 md:py-16">
-  <div class="mx-auto max-w-3xl">
-    {# Meta-bar: data · livello · topic ─────────────────────────── #}
-    <div class="mb-8 flex flex-wrap items-center gap-3 text-sm text-foreground/50">
-      {% if has_level %}
-        <span class="text-foreground/20">·</span>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold {{ level_style.bg }} {{ level_style.text }}">
-          {# STATICO — icona stella livello #}
-          <svg class="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-          </svg>
-          {{ level_label }}
-        </span>
-      {% endif %}
+  <div class="flex flex-col gap-12 md:gap-16 lg:flex-row lg:items-start lg:gap-24">
+    {# ── Sidebar sinistra ─────────────────────────────────────────── #}
+    <aside class="order-2 w-full shrink-0 lg:order-1 lg:w-72 xl:w-80">
+      <div class="flex flex-col gap-6 lg:sticky lg:top-8">
+        {# Ultime guide #}
+        {{ drupal_view('tutorial', 'block_2') }}
 
-      {% if has_topics %}
-        {% for item in node.field_tutorial_topics %}
-          {% if item.entity %}
-            {% set t_color = item.entity.field_tutorial_topics_color.value is not empty ? item.entity.field_tutorial_topics_color.value : null %}
-            <span class="text-foreground/20">·</span>
-            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/60">
-              {% if t_color %}
-                <span class="h-2 w-2 shrink-0 rounded-full" style="background-color: {{ t_color }};" aria-hidden="true"></span>
-              {% endif %}
-              {{ item.entity.label }}
-            </span>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      {# STATICO — etichetta tipo contenuto (nessun campo Drupal) #}
-      <span class="text-foreground/20">·</span>
-      <span class="inline-flex items-center gap-1.5 text-xs text-foreground/40">
-        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-        </svg>Guida pratica
-      </span>
-    </div>
-
-    {# Preview / intro ────────────────────────────────────────────── #}
-    {% if has_preview %}
-      <p class="mb-10 border-l-4 border-accent pl-5 text-xl leading-relaxed font-medium text-foreground/75">
-        {{ node.field_tutorial_preview.value }}
-      </p>
-    {% endif %}
-
-    {# Separatore prima del contenuto #}
-    {% if has_preview and has_content %}
-      <hr class="mb-10 border-foreground/10" />
-    {% endif %}
-
-    {# Contenuto paragrafi ───────────────────────────────────────── #}
-    {% if has_content %}
-      <div class="prose-content flex flex-col gap-8">
-        {{ content.field_tutorial_content }}
+        {# Prossimi eventi #}
+        {{ drupal_view('events', 'block_2') }}
       </div>
-    {% endif %}
+    </aside>
+
+    {# ── Corpo principale ─────────────────────────────────────────── #}
+    <div class="order-1 min-w-0 flex-1 lg:order-2 lg:max-w-3xl">
+      {# Meta-bar: data · livello · topic ─────────────────────────── #}
+      <div class="mb-8 flex flex-wrap items-center gap-3 text-sm text-foreground/50">
+        {% if has_level %}
+          <span class="text-foreground/20">·</span>
+          <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold {{ level_style.bg }} {{ level_style.text }}">
+            {# STATICO — icona stella livello #}
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            {{ level_label }}
+          </span>
+        {% endif %}
+
+        {% if has_topics %}
+          {% for item in node.field_tutorial_topics %}
+            {% if item.entity %}
+              {% set t_color = item.entity.field_tutorial_topics_color.value is not empty ? item.entity.field_tutorial_topics_color.value : null %}
+              <span class="text-foreground/20">·</span>
+              <span class="inline-flex items-center gap-1.5 text-xs font-medium text-foreground/60">
+                {% if t_color %}
+                  <span class="h-2 w-2 shrink-0 rounded-full" style="background-color: {{ t_color }};" aria-hidden="true"></span>
+                {% endif %}
+                {{ item.entity.label }}
+              </span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {# STATICO — etichetta tipo contenuto (nessun campo Drupal) #}
+        <span class="text-foreground/20">·</span>
+        <span class="inline-flex items-center gap-1.5 text-xs text-foreground/40">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>Guida pratica
+        </span>
+      </div>
+
+      {# Preview / intro ────────────────────────────────────────────── #}
+      {% if has_preview %}
+        <p class="mb-10 border-l-4 border-accent pl-5 text-xl leading-relaxed font-medium text-foreground/75">
+          {{ node.field_tutorial_preview.value }}
+        </p>
+      {% endif %}
+
+      {# Separatore prima del contenuto #}
+      {% if has_preview and has_content %}
+        <hr class="mb-10 border-foreground/10" />
+      {% endif %}
+
+      {# Contenuto paragrafi ───────────────────────────────────────── #}
+      {% if has_content %}
+        <div class="prose-content flex flex-col gap-8">
+          {{ content.field_tutorial_content }}
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>

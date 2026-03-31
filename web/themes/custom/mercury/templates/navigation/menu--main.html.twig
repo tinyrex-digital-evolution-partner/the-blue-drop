@@ -37,7 +37,7 @@
           item.in_active_trail ? 'bg-muted/50' : '',
           'flex flex-wrap justify-between md:flex-nowrap',
           'md:w-auto md:relative md:max-w-[375px]',
-          'text-base font-medium rounded-md'
+          'text-base font-medium'
         ]|filter(c => c is not empty)
       %}
 
@@ -52,7 +52,7 @@
         {% if url is not empty %}
           <a
             href="{{ url }}"
-            class="flex min-h-[44px] shrink-1 grow-1 basis-0 items-center gap-1 rounded-md p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3"
+            class="flex min-h-[44px] shrink-1 grow-1 basis-0 items-center gap-1 p-2 duration-300 md:min-h-auto hover:md:bg-primary hover:md:text-primary-foreground focus:md:bg-primary focus:md:text-primary-foreground xl:px-3"
             data-level="1"
           >
             {{ title }}

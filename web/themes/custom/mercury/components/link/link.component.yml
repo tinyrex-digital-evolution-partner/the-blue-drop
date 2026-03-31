@@ -1,0 +1,52 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+name: Link
+group: Base
+status: stable
+props:
+  type: object
+  required:
+    - url
+    - title
+  properties:
+    url:
+      type: string
+      title: URL
+      format: uri-reference
+      examples:
+        - "https://example.com"
+    title:
+      type: string
+      title: Title
+      examples:
+        - "Visit our website"
+    target:
+      type: string
+      title: Target
+      enum:
+        - _self
+        - _blank
+      meta:enum:
+        _self: Same window
+        _blank: New window
+      default: "_self"
+      examples:
+        - "_self"
+    icon:
+      type: string
+      title: Icon
+      description: "Icon name from the Phosphor Icons library"
+      default: "arrow-square-out"
+      examples:
+        - "arrow-square-out"
+    variant:
+      type: string
+      title: Style
+      enum:
+        - default
+        - subtle
+      meta:enum:
+        default: Default
+        subtle: Subtle
+      default: default
+      examples:
+        - default
