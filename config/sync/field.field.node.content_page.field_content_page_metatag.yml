@@ -1,0 +1,21 @@
+uuid: ed779b2b-0c35-40fb-a31b-92226250cdee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_page_metatag
+    - node.type.content_page
+  module:
+    - metatag
+id: node.content_page.field_content_page_metatag
+field_name: field_content_page_metatag
+entity_type: node
+bundle: content_page
+label: Metatag
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

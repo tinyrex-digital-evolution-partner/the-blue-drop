@@ -1,0 +1,46 @@
+uuid: 49dc2246-ba35-41f0-a8ab-7e02b0258a16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_content
+    - node.type.event
+    - paragraphs.paragraphs_type.p_block_image
+    - paragraphs.paragraphs_type.p_block_links
+    - paragraphs.paragraphs_type.p_block_related_content
+    - paragraphs.paragraphs_type.p_block_text
+  module:
+    - entity_reference_revisions
+id: node.event.field_event_content
+field_name: field_event_content
+entity_type: node
+bundle: event
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      p_block_text: p_block_text
+      p_block_image: p_block_image
+      p_block_links: p_block_links
+      p_block_related_content: p_block_related_content
+    negate: 0
+    target_bundles_drag_drop:
+      p_block_image:
+        weight: -4
+        enabled: true
+      p_block_links:
+        weight: 6
+        enabled: true
+      p_block_related_content:
+        weight: 7
+        enabled: true
+      p_block_text:
+        weight: -5
+        enabled: true
+field_type: entity_reference_revisions

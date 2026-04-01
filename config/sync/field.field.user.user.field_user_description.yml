@@ -1,0 +1,24 @@
+uuid: 70c0f25b-8de0-4704-8f4a-14b0d5985f91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_user_description
+    - filter.format.content_format
+  module:
+    - text
+    - user
+id: user.user.field_user_description
+field_name: field_user_description
+entity_type: user
+bundle: user
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - content_format
+field_type: text_long

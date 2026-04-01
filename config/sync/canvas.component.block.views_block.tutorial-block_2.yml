@@ -1,0 +1,26 @@
+uuid: a410564c-154d-4e41-8029-ea579d6c25e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.tutorial
+  module:
+    - views
+active_version: e2497596f861097f
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'views_block:tutorial-block_2'
+        label: 'Tutorial: BLOCK: Correlati'
+        label_display: '0'
+        provider: views
+        views_label: ''
+        items_per_page: null
+    fallback_metadata:
+      slot_definitions: null
+label: 'Tutorial: BLOCK: Correlati'
+id: block.views_block.tutorial-block_2
+provider: views
+source: block
+source_local_id: 'views_block:tutorial-block_2'

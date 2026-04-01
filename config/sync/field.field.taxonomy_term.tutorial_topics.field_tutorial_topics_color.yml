@@ -1,0 +1,21 @@
+uuid: 0c02a83e-2eab-4a6c-8770-7d7a51df9209
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_tutorial_topics_color
+    - taxonomy.vocabulary.tutorial_topics
+id: taxonomy_term.tutorial_topics.field_tutorial_topics_color
+field_name: field_tutorial_topics_color
+entity_type: taxonomy_term
+bundle: tutorial_topics
+label: Color
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '#3B4FD8'
+default_value_callback: ''
+settings: {  }
+field_type: string

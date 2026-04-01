@@ -1,0 +1,10 @@
+uuid: 16618782-d112-4952-94a3-549f80b73963
+langcode: en
+status: true
+dependencies: {  }
+id: node__blog_post
+label: 'Content: Blog post'
+tags:
+  abstract: '[node:field_blog_post_preview]'
+  description: '[node:field_blog_post_preview]'
+  title: '[node:title] | [site:name]'

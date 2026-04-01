@@ -1,0 +1,27 @@
+uuid: 09b074b1-0b5b-45a8-b686-a1f6df87c685
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.quickstart-menu
+  module:
+    - system
+active_version: ceb7cb7d7d8ee65e
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:quickstart-menu'
+        label: 'Quickstart menu'
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: 'Quickstart menu'
+id: block.system_menu_block.quickstart-menu
+provider: system
+source: block
+source_local_id: 'system_menu_block:quickstart-menu'

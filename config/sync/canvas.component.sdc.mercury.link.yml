@@ -1,0 +1,76 @@
+uuid: 2fc69053-0718-41a9-b2c7-929be19d3cc2
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - options
+  theme:
+    - mercury
+active_version: 77b3b835d1648e87
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        url:
+          required: true
+          field_type: link
+          field_storage_settings: {  }
+          field_instance_settings:
+            title: 0
+            link_type: 17
+          field_widget: link_default
+          default_value:
+            -
+              uri: 'https://example.com'
+              options: {  }
+          expression: ℹ︎link␟url
+        title:
+          required: true
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Visit our website'
+          expression: ℹ︎string␟value
+        target:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: _self
+          expression: ℹ︎list_string␟value
+        icon:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: arrow-square-out
+          expression: ℹ︎string␟value
+        variant:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: default
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Link
+id: sdc.mercury.link
+provider: mercury
+source: sdc
+source_local_id: 'mercury:link'

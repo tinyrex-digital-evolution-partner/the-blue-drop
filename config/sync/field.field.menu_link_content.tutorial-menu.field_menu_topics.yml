@@ -1,0 +1,29 @@
+uuid: f2a17fff-8b54-4850-bd29-b6645bc1d269
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_menu_topics
+    - system.menu.tutorial-menu
+    - taxonomy.vocabulary.tutorial_topics
+id: menu_link_content.tutorial-menu.field_menu_topics
+field_name: field_menu_topics
+entity_type: menu_link_content
+bundle: tutorial-menu
+label: Topics
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tutorial_topics: tutorial_topics
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

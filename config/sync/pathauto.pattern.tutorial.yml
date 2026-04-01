@@ -1,0 +1,22 @@
+uuid: 1a726f70-f3ee-46ac-9fcf-fcf484ca3b8a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: tutorial
+label: Tutorial
+type: 'canonical_entities:node'
+pattern: '/tutorial/[node:field_tutorial_topics:entity:name]/[node:title]'
+selection_criteria:
+  ef3ae645-8577-41b2-8f15-7e8f8f1320bf:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: ef3ae645-8577-41b2-8f15-7e8f8f1320bf
+    context_mapping:
+      node: node
+    bundles:
+      tutorial: tutorial
+selection_logic: and
+weight: -5
+relationships: {  }

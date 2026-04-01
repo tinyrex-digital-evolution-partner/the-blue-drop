@@ -1,0 +1,37 @@
+uuid: b4366f71-da32-4e5d-8f48-d129d4e3c5b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.tutorial
+  module:
+    - views
+active_version: 3b00ce3edeee290f
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'views_block:tutorial-block_1'
+        label: 'Tutorial: BLOCK: Home'
+        label_display: '0'
+        provider: views
+        views_label: ''
+        items_per_page: null
+    fallback_metadata:
+      slot_definitions: null
+  a334131f48e2c545:
+    settings:
+      default_settings:
+        id: 'views_block:tutorial-block_1'
+        label: Tutorial
+        label_display: '0'
+        provider: views
+        views_label: ''
+        items_per_page: null
+    fallback_metadata:
+      slot_definitions: null
+label: 'Tutorial: BLOCK: Home'
+id: block.views_block.tutorial-block_1
+provider: views
+source: block
+source_local_id: 'views_block:tutorial-block_1'

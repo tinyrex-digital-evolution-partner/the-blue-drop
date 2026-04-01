@@ -1,0 +1,13 @@
+uuid: daebcc51-d366-4caa-94da-f4d3a5329e0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.blog_topics
+id: taxonomy_term.blog_topics
+targetEntityType: taxonomy_term
+bundle: blog_topics
+action: page_not_found
+no_bypass: false
+bypass_message: false
+configuration: {  }

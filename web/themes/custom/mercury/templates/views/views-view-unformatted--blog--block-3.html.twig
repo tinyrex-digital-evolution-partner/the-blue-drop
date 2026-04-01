@@ -1,0 +1,39 @@
+{#
+/**
+ * Template per blog — block_3 (articoli correlati).
+ * Usato nel dettaglio blog post per mostrare post correlati in fondo alla pagina.
+ */
+#}
+
+{% if rows %}
+  <div class="container mx-auto px-4 py-16 md:py-20">
+    {# Header sezione #}
+    <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div class="flex flex-col gap-3">
+        <span class="text-xs font-bold tracking-widest text-primary uppercase">Dal nostro blog</span>
+        <h3 class="text-2xl leading-none font-bold tracking-tight md:text-3xl">Dai un'occhiata anche a questi articoli</h3>
+      </div>
+      <a href="/blog" class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-primary transition-all duration-200 hover:gap-4">
+        Tutti gli articoli<svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    {# Griglia articoli #}
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {% for row in rows %}
+        {{- row.content -}}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

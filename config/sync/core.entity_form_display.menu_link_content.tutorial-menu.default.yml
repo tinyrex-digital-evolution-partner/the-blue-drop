@@ -1,0 +1,55 @@
+uuid: b1836f0b-4a6c-4814-9718-835fce2bcb25
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.tutorial-menu.field_menu_topics
+    - system.menu.tutorial-menu
+  module:
+    - link
+    - menu_item_extras
+    - tagify
+id: menu_link_content.tutorial-menu.default
+targetEntityType: menu_link_content
+bundle: tutorial-menu
+mode: default
+content:
+  field_menu_topics:
+    type: tagify_entity_reference_autocomplete_widget
+    weight: 131
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
+      parent_selection: 1
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  view_mode:
+    type: menu_item_extras_view_mode_selector_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

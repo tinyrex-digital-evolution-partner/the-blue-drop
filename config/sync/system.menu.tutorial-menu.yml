@@ -1,0 +1,8 @@
+uuid: aceeedfc-79d4-401c-a8db-1427cbd83c7b
+langcode: en
+status: true
+dependencies: {  }
+id: tutorial-menu
+label: 'Tutorial menu'
+description: ''
+locked: false

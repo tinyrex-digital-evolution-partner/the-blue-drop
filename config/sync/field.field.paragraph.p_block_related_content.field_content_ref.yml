@@ -1,0 +1,35 @@
+uuid: cd9492a4-cb66-47f6-a869-458f3d0fcafa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content_ref
+    - node.type.blog_post
+    - node.type.content_page
+    - node.type.event
+    - node.type.tutorial
+    - paragraphs.paragraphs_type.p_block_related_content
+id: paragraph.p_block_related_content.field_content_ref
+field_name: field_content_ref
+entity_type: paragraph
+bundle: p_block_related_content
+label: 'Content ref'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      blog_post: blog_post
+      content_page: content_page
+      event: event
+      tutorial: tutorial
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: blog_post
+field_type: entity_reference

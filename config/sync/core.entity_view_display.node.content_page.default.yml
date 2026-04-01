@@ -1,0 +1,44 @@
+uuid: 8f438535-1e9a-4ab5-b865-1ab30895a09e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.content_page.field_content_page_content
+    - field.field.node.content_page.field_content_page_metatag
+    - field.field.node.content_page.field_content_page_preview
+    - node.type.content_page
+  module:
+    - entity_reference_revisions
+    - metatag
+    - user
+id: node.content_page.default
+targetEntityType: node
+bundle: content_page
+mode: default
+content:
+  field_content_page_content:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_content_page_metatag:
+    type: metatag_empty_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_content_page_preview:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  langcode: true
+  links: true

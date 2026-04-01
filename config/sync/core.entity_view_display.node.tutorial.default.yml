@@ -1,0 +1,66 @@
+uuid: 430ad9ad-e2ba-4416-ab16-2b37d0605f8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.tutorial.field_tutorial_content
+    - field.field.node.tutorial.field_tutorial_level
+    - field.field.node.tutorial.field_tutorial_metatag
+    - field.field.node.tutorial.field_tutorial_preview
+    - field.field.node.tutorial.field_tutorial_topics
+    - node.type.tutorial
+  module:
+    - entity_reference_revisions
+    - metatag
+    - user
+id: node.tutorial.default
+targetEntityType: node
+bundle: tutorial
+mode: default
+content:
+  field_tutorial_content:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_tutorial_level:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_tutorial_metatag:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_tutorial_preview:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_tutorial_topics:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

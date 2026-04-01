@@ -1,0 +1,22 @@
+uuid: 4cab98b2-7b3d-45ea-b261-1624f5677065
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.p_block_text.field_content_text
+    - paragraphs.paragraphs_type.p_block_text
+  module:
+    - text
+id: paragraph.p_block_text.default
+targetEntityType: paragraph
+bundle: p_block_text
+mode: default
+content:
+  field_content_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

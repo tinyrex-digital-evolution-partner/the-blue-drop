@@ -1,0 +1,19 @@
+uuid: 9135ef3a-e301-469b-bdf6-ddb729538002
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_block_title
+    - paragraphs.paragraphs_type.p_block_related_content
+id: paragraph.p_block_related_content.field_block_title
+field_name: field_block_title
+entity_type: paragraph
+bundle: p_block_related_content
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

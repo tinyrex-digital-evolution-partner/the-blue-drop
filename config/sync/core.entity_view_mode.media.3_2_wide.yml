@@ -1,0 +1,13 @@
+uuid: 310a963d-1f4a-4398-aea1-e14b556f71f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+_core:
+  default_config_hash: qQ-9DfjR9NJ441_s2BqS7p-B3pLqePh-FM4eCm43-xw
+id: media.3_2_wide
+label: '3:2 Wide'
+description: ''
+targetEntityType: media
+cache: true

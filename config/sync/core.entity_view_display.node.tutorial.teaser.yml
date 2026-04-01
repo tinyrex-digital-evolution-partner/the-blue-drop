@@ -1,0 +1,52 @@
+uuid: 4f8bbb5f-7c55-44a0-b58b-7e85e29b14b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.tutorial.field_tutorial_content
+    - field.field.node.tutorial.field_tutorial_level
+    - field.field.node.tutorial.field_tutorial_metatag
+    - field.field.node.tutorial.field_tutorial_preview
+    - field.field.node.tutorial.field_tutorial_topics
+    - node.type.tutorial
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.tutorial.teaser
+targetEntityType: node
+bundle: tutorial
+mode: teaser
+content:
+  field_tutorial_level:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_tutorial_preview:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_tutorial_topics:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_tutorial_content: true
+  field_tutorial_metatag: true
+  langcode: true
+  links: true

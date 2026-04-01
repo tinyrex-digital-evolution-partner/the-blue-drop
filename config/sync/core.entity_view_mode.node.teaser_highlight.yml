@@ -1,0 +1,11 @@
+uuid: c786a1a5-a7d8-4979-a51a-02a29e77363d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_highlight
+label: 'Teaser highlight'
+description: null
+targetEntityType: node
+cache: true

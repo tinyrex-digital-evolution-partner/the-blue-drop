@@ -1,0 +1,31 @@
+uuid: 6a70fbd8-b078-4ac6-8a7d-e90f65561b3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.tutorial_topics.field_tutorial_topics_color
+    - taxonomy.vocabulary.tutorial_topics
+  module:
+    - text
+id: taxonomy_term.tutorial_topics.default
+targetEntityType: taxonomy_term
+bundle: tutorial_topics
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_tutorial_topics_color:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

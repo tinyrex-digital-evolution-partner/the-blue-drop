@@ -1,0 +1,27 @@
+uuid: 09650a09-b342-48e2-8a6a-1006aee24911
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tutorial-menu
+  module:
+    - system
+active_version: 1e4c55c1dc932871
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:tutorial-menu'
+        label: 'Tutorial menu'
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: 'Tutorial menu'
+id: block.system_menu_block.tutorial-menu
+provider: system
+source: block
+source_local_id: 'system_menu_block:tutorial-menu'

@@ -1,0 +1,8 @@
+uuid: 3317a3bf-fab9-4e53-9158-ad49b707b2e4
+langcode: en
+status: true
+dependencies: {  }
+id: footer-2
+label: 'Footer 2'
+description: Risorse
+locked: false

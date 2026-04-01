@@ -1,0 +1,21 @@
+uuid: 22d94218-7037-4c59-8cea-ad4fd60f02b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tutorial_metatag
+    - node.type.tutorial
+  module:
+    - metatag
+id: node.tutorial.field_tutorial_metatag
+field_name: field_tutorial_metatag
+entity_type: node
+bundle: tutorial
+label: Metatag
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

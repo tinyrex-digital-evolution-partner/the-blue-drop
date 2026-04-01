@@ -1,0 +1,21 @@
+uuid: 89b16a4a-6222-42d8-9baf-f4b02c03fac3
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: Development
+description: "Configurazioni specifiche per l'ambiente di sviluppo locale"
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/split/dev
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - google_tag.container.G-000000000.69cd385cba1533.96285556
+  - honeypot.settings
+  - system.cron
+  - system.maintenance
+  - system.performance

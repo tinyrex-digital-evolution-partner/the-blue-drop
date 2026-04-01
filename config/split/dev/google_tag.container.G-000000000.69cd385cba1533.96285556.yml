@@ -1,0 +1,32 @@
+uuid: feda8f22-ca95-4db8-a55e-cb67ca55049a
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: G-000000000.69cd385cba1533.96285556
+label: G-000000000
+weight: 0
+tag_container_ids:
+  - G-000000000
+advanced_settings:
+  consent_mode: false
+dimensions_metrics: {  }
+conditions:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+events:
+  generate_lead:
+    value: ''
+    currency: ''
+  search: {  }
+  login:
+    method: CMS
+  sign_up:
+    method: CMS
+  custom: {  }

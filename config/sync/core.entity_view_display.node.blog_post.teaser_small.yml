@@ -1,0 +1,91 @@
+uuid: ccf4b61d-e9c2-45cb-8ac8-73571bf1173e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_small
+    - field.field.node.blog_post.field_blog_post_caption
+    - field.field.node.blog_post.field_blog_post_content
+    - field.field.node.blog_post.field_blog_post_image
+    - field.field.node.blog_post.field_blog_post_metatag
+    - field.field.node.blog_post.field_blog_post_preview
+    - field.field.node.blog_post.field_blog_post_tags
+    - field.field.node.blog_post.field_blog_post_topics
+    - node.type.blog_post
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - metatag
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.blog_post.teaser_small
+targetEntityType: node
+bundle: blog_post
+mode: teaser_small
+content:
+  field_blog_post_caption:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_blog_post_content:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_blog_post_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_blog_post_metatag:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_blog_post_preview:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_blog_post_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_blog_post_topics:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

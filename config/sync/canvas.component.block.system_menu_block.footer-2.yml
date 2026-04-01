@@ -1,0 +1,27 @@
+uuid: 2eb3f9a2-3f8c-43e5-bb47-d07b8569264c
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.footer-2
+  module:
+    - system
+active_version: cdfe53ecede98bd6
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:footer-2'
+        label: 'Footer 2'
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: 'Footer 2'
+id: block.system_menu_block.footer-2
+provider: system
+source: block
+source_local_id: 'system_menu_block:footer-2'

@@ -1,0 +1,22 @@
+uuid: a10133c9-cc15-4445-b265-a41a9566795a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: content_page
+label: 'Content page'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parents:join-path]/[node:title]-asdasd'
+selection_criteria:
+  a26268a1-f423-4eb4-b007-1b556cde7692:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a26268a1-f423-4eb4-b007-1b556cde7692
+    context_mapping:
+      node: node
+    bundles:
+      content_page: content_page
+selection_logic: and
+weight: -5
+relationships: {  }

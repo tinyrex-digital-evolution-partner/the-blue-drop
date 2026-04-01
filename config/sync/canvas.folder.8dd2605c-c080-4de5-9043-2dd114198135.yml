@@ -1,0 +1,21 @@
+uuid: 8dd2605c-c080-4de5-9043-2dd114198135
+langcode: en
+status: true
+dependencies: {  }
+name: Menus
+configEntityTypeId: component
+weight: 0
+items:
+  - block.system_menu_block.account
+  - block.system_menu_block.admin
+  - block.system_menu_block.blog-menu
+  - block.system_menu_block.content
+  - block.system_menu_block.footer
+  - block.system_menu_block.footer-1
+  - block.system_menu_block.footer-2
+  - block.system_menu_block.main
+  - block.system_menu_block.navigation-user-links
+  - block.system_menu_block.quickstart-menu
+  - block.system_menu_block.tools
+  - block.system_menu_block.top-tasks
+  - block.system_menu_block.tutorial-menu

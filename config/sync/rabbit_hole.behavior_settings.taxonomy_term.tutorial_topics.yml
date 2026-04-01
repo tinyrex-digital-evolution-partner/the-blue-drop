@@ -1,0 +1,13 @@
+uuid: f363923b-a921-45c4-b876-4c8191d3c9a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tutorial_topics
+id: taxonomy_term.tutorial_topics
+targetEntityType: taxonomy_term
+bundle: tutorial_topics
+action: page_not_found
+no_bypass: false
+bypass_message: false
+configuration: {  }

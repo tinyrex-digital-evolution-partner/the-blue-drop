@@ -1,0 +1,9 @@
+uuid: 54363fb7-f8c9-4fb8-b8e9-8b1d4c924fe4
+langcode: en
+status: true
+dependencies: {  }
+name: Test
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.mercury.test

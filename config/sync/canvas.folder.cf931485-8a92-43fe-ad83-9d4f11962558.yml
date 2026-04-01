@@ -1,0 +1,13 @@
+uuid: cf931485-8a92-43fe-ad83-9d4f11962558
+langcode: en
+status: true
+dependencies: {  }
+name: 'Project Browser'
+configEntityTypeId: component
+weight: 0
+items:
+  - block.project_browser_block.drupal_core
+  - block.project_browser_block.drupalorg_jsonapi
+  - block.project_browser_block.local_modules
+  - block.project_browser_block.recipes
+  - block.project_browser_block.recommended

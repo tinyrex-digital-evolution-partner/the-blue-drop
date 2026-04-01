@@ -1,0 +1,8 @@
+uuid: ed9aab9a-4b4c-4a26-90a2-86737a27c1c6
+langcode: en
+status: true
+dependencies: {  }
+id: footer-1
+label: 'Footer 1'
+description: Community
+locked: false

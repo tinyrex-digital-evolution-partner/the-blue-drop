@@ -1,0 +1,10 @@
+uuid: e856bc28-0453-4ebd-9d20-bca6cb8af43b
+langcode: en
+status: true
+dependencies: {  }
+id: node__content_page
+label: 'Content: Content page'
+tags:
+  abstract: '[node:field_content_page_preview]'
+  description: '[node:field_content_page_preview]'
+  title: '[node:title] | [site:name]'

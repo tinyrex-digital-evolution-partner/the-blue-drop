@@ -1,0 +1,34 @@
+uuid: daeba5b6-1915-4aaf-aa2c-7d37ee139535
+langcode: en
+status: true
+dependencies:
+  module:
+    - captcha
+    - coffee
+    - contextual
+    - file
+    - honeypot
+    - klaro
+    - media
+    - navigation
+    - node
+    - system
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access coffee'
+  - 'access content'
+  - 'access contextual links'
+  - 'access navigation'
+  - 'bypass honeypot protection'
+  - 'delete own files'
+  - 'skip CAPTCHA'
+  - 'use klaro'
+  - 'view media'
+  - 'view own unpublished content'
+  - 'view the administration theme'

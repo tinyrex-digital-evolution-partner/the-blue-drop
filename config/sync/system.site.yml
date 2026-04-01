@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: HlN7eAN2N4JIHsYv56V4E7sqC9bS609KwvGFjyD_mgk
+langcode: en
+uuid: 7f006d7f-2eb8-4bcc-a1b3-9f8e3a566230
+name: 'The Blue Drop'
+mail: info@tinyrex.it
+slogan: "Blog su Drupal per l'Italia"
+page:
+  403: /user/login
+  404: ''
+  front: /page/3
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: null

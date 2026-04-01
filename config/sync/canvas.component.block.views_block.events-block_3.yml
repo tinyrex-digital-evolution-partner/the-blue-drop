@@ -1,0 +1,26 @@
+uuid: d82f9eed-3e87-4a29-979d-bc803ce84c32
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.events
+  module:
+    - views
+active_version: 7bb63925759584f3
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'views_block:events-block_3'
+        label: 'Events: Block: Eventi correlati (ID)'
+        label_display: '0'
+        provider: views
+        views_label: ''
+        items_per_page: null
+    fallback_metadata:
+      slot_definitions: null
+label: 'Events: Block: Eventi correlati (ID)'
+id: block.views_block.events-block_3
+provider: views
+source: block
+source_local_id: 'views_block:events-block_3'

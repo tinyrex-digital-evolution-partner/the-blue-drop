@@ -1,0 +1,27 @@
+uuid: 76704d5d-8073-4610-a81b-2a04de94806c
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.blog-menu
+  module:
+    - system
+active_version: 52d985b2bcf3bd77
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:blog-menu'
+        label: 'Blog menu'
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: 'Blog menu'
+id: block.system_menu_block.blog-menu
+provider: system
+source: block
+source_local_id: 'system_menu_block:blog-menu'

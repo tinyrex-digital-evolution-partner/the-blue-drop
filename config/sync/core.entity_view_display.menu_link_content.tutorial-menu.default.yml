@@ -1,0 +1,26 @@
+uuid: 802466aa-b131-4e0a-aa9a-f393be4aee3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.tutorial-menu.field_menu_topics
+    - system.menu.tutorial-menu
+id: menu_link_content.tutorial-menu.default
+targetEntityType: menu_link_content
+bundle: tutorial-menu
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_menu_topics:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

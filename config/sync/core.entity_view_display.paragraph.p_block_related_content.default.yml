@@ -1,0 +1,31 @@
+uuid: 57c334aa-11dc-4f89-94e0-99cff9bdadbf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.p_block_related_content.field_block_title
+    - field.field.paragraph.p_block_related_content.field_content_ref
+    - paragraphs.paragraphs_type.p_block_related_content
+id: paragraph.p_block_related_content.default
+targetEntityType: paragraph
+bundle: p_block_related_content
+mode: default
+content:
+  field_block_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_content_ref:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_highlight
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

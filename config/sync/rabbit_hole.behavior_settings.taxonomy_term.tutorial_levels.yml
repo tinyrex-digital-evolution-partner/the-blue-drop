@@ -1,0 +1,13 @@
+uuid: fc3b567b-da08-4559-a1a8-b772009d85df
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tutorial_levels
+id: taxonomy_term.tutorial_levels
+targetEntityType: taxonomy_term
+bundle: tutorial_levels
+action: page_not_found
+no_bypass: false
+bypass_message: false
+configuration: {  }

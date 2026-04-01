@@ -1,0 +1,19 @@
+uuid: c9ba9f79-fb9e-4804-a9bb-019815a24a01
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_post_preview
+    - node.type.blog_post
+id: node.blog_post.field_blog_post_preview
+field_name: field_blog_post_preview
+entity_type: node
+bundle: blog_post
+label: Preview
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

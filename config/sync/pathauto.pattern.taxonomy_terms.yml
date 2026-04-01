@@ -1,0 +1,25 @@
+uuid: e483b386-4700-4903-91e9-11cf7c1dece9
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_terms
+label: 'Taxonomy terms'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:name]'
+selection_criteria:
+  dacacc84-678f-4e70-809f-db6c1fdd2299:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: dacacc84-678f-4e70-809f-db6c1fdd2299
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      blog_tags: blog_tags
+      blog_topics: blog_topics
+      tutorial_levels: tutorial_levels
+      tutorial_topics: tutorial_topics
+selection_logic: and
+weight: -5
+relationships: {  }

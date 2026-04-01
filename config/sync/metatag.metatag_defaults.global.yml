@@ -1,0 +1,13 @@
+uuid: 3a00035a-d104-47ae-bda1-fc2fc1ad2b7f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  abstract: 'Tutorial, guide e news su Drupal per la community italiana. Rivolto a sviluppatori, aziende e decision maker che vogliono rimanere aggiornati.'
+  canonical_url: '[current-page:url]'
+  description: 'Tutorial, guide e news su Drupal per la community italiana. Rivolto a sviluppatori, aziende e decision maker che vogliono rimanere aggiornati.'
+  title: '[site:name] | [site:slogan]'

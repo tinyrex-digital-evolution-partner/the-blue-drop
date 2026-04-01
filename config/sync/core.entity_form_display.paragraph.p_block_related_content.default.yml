@@ -1,0 +1,37 @@
+uuid: 35ff6b12-6921-4306-a8af-3cb831a5a3ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.p_block_related_content.field_block_title
+    - field.field.paragraph.p_block_related_content.field_content_ref
+    - paragraphs.paragraphs_type.p_block_related_content
+  module:
+    - tagify
+id: paragraph.p_block_related_content.default
+targetEntityType: paragraph
+bundle: p_block_related_content
+mode: default
+content:
+  field_block_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_content_ref:
+    type: tagify_select_widget
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      show_entity_id: 0
+      parent_selection: 1
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

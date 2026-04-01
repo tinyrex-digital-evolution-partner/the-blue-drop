@@ -1,0 +1,8 @@
+uuid: 2125d312-5671-4b51-a2e1-b21fe4238014
+langcode: en
+status: true
+dependencies: {  }
+id: quickstart-menu
+label: 'Quickstart menu'
+description: ''
+locked: false

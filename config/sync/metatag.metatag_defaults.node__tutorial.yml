@@ -1,0 +1,10 @@
+uuid: f24c1765-969a-4406-b227-cbc3c63e736f
+langcode: en
+status: true
+dependencies: {  }
+id: node__tutorial
+label: 'Content: Tutorial'
+tags:
+  abstract: '[node:field_tutorial_preview]'
+  description: '[node:field_tutorial_preview]'
+  title: '[node:title] | [site:name]'
