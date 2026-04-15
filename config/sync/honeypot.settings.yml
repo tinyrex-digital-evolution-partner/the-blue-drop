@@ -1,4 +1,4 @@
-protect_all_forms: false
+protect_all_forms: true
 unprotected_forms:
   - user_login_form
   - search_form
@@ -12,6 +12,7 @@ expire: 300
 form_settings:
   user_register_form: true
   user_pass: true
-  feedback_contact_message_form: false
-  _contact_message_form: false
-  comment_comment_form: true
+  node_blog_post_form: false
+  node_content_page_form: false
+  node_event_form: false
+  node_tutorial_form: false
