@@ -7,12 +7,12 @@ dependencies:
 id: content_page
 label: 'Content page'
 type: 'canonical_entities:node'
-pattern: '[node:menu-link:parents:join-path]/[node:title]-asdasd'
+pattern: '[node:menu-link:parents:join-path]/[node:title]'
 selection_criteria:
-  a26268a1-f423-4eb4-b007-1b556cde7692:
+  004525ee-9316-4e26-8bae-9c6b05a1ca27:
     id: 'entity_bundle:node'
     negate: false
-    uuid: a26268a1-f423-4eb4-b007-1b556cde7692
+    uuid: 004525ee-9316-4e26-8bae-9c6b05a1ca27
     context_mapping:
       node: node
     bundles:
