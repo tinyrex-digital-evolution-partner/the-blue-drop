@@ -92,24 +92,22 @@
     {% endif %}
 
     {# Title #}
-    <h3 class="text-xl leading-snug font-bold tracking-tight">
-      <a href="{{ url }}" class="transition-colors duration-200 hover:text-primary">{{ label }}</a>
-    </h3>
+    <h3 class="text-xl font-bold tracking-tight"><a href="{{ url }}" class="transition-colors duration-200 hover:text-primary">{{ label }}</a></h3>
 
     {# Caption #}
     {% if has_caption %}
-      <p class="-mt-2 text-sm font-semibold text-primary">
+      <p class="mb-0 text-sm font-semibold text-primary">
         {{ node.field_blog_post_caption.value }}
       </p>
     {% endif %}
 
     {# Preview #}
     {% if has_preview %}
-      <p class="line-clamp-2 text-sm leading-relaxed text-foreground/70">
+      <p class="mb-0 line-clamp-2 text-sm leading-relaxed text-foreground/70">
         {{ node.field_blog_post_preview.value }}
       </p>
     {% else %}
-      <p class="line-clamp-2 text-sm leading-relaxed text-foreground/50 italic">
+      <p class="mb-0 line-clamp-2 text-sm leading-relaxed text-foreground/50 italic">
         Leggi l'articolo completo per scoprire tutti i dettagli.
       </p>
     {% endif %}
