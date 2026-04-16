@@ -1,0 +1,27 @@
+uuid: 5db9f535-ab1c-47e3-aa5c-c658881aaea3
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.resources-menu
+  module:
+    - system
+active_version: b5414453c469c075
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:resources-menu'
+        label: 'Resources menu'
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: 'Resources menu'
+id: block.system_menu_block.resources-menu
+provider: system
+source: block
+source_local_id: 'system_menu_block:resources-menu'

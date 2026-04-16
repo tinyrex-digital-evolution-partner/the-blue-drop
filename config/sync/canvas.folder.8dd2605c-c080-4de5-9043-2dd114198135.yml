@@ -16,6 +16,7 @@ items:
   - block.system_menu_block.main
   - block.system_menu_block.navigation-user-links
   - block.system_menu_block.quickstart-menu
+  - block.system_menu_block.resources-menu
   - block.system_menu_block.tools
   - block.system_menu_block.top-tasks
   - block.system_menu_block.tutorial-menu
